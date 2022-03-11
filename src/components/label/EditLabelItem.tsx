@@ -6,17 +6,25 @@ import { Check, Edit2, Tag, Trash2 } from "react-feather";
 import Input from "~/components/ui/Input";
 import { iconSize } from "~/utils/constants";
 
-export function EditLabelItem({ label }: { label: Label }) {
+export default function EditLabelItem({ label }: { label: Label }) {
   const [openDeleteBtn, setopenDeleteBtn] = useState(false);
   const [openUpdateInput, setOpenUpdateInput] = useState(false);
   const [labelName, setLabelName] = useState("");
-  const { deleteLabel, updateLabel } = useLabelStore();
+  const { deleteLabel, updateLabel, labels } = useLabelStore((state) => ({
+    labels: state.labels,
+    deleteLabel: state.deleteLabel,
+    updateLabel: state.updateLabel,
+  }));
 
   function handleUpdateLabel() {
-    if (labelName !== label.labelName) {
+    const findLabel = labels.findIndex(
+      (label) => label.labelName === labelName
+    );
+
+    if (labelName !== label.labelName && labelName !== "" && findLabel === -1) {
       updateLabel({ id: label.id, labelName });
+      setOpenUpdateInput(false);
     }
-    setOpenUpdateInput(false);
   }
 
   function handleDeleteLabel() {
@@ -52,15 +60,13 @@ export function EditLabelItem({ label }: { label: Label }) {
             }
           }}
         />
-      ) : (
-        <span>{label.labelName}</span>
-      )}
+      ) : label.labelName}
       {openUpdateInput ? (
         <Button
           icon
           onClick={handleUpdateLabel}
-          aria-label="rename label"
-          dataTip="Rename label"
+          aria-label="Save label"
+          dataTip="Save label"
         >
           <Check size={iconSize} />
         </Button>
@@ -68,7 +74,7 @@ export function EditLabelItem({ label }: { label: Label }) {
         <Button
           icon
           onClick={() => setOpenUpdateInput(true)}
-          aria-label="edit label"
+          aria-label="Rename label"
           dataTip="Rename label"
         >
           <Edit2 size={iconSize} />

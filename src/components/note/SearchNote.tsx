@@ -16,7 +16,7 @@ export default function SearchNote() {
   }
 
   useEffect(() => {
-    if (searchRef.current && pathname.includes("/search") == false) {
+    if (searchRef.current && pathname.includes("/search") === false) {
       searchRef.current.value = "";
     }
   }, [pathname]);

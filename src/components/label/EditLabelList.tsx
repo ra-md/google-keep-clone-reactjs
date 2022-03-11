@@ -1,7 +1,10 @@
 import { Label } from "~/types";
-import { EditLabelItem } from "./EditLabelItem";
+import { useLabelStore } from "~/store/labelStore";
+import EditLabelItem from "./EditLabelItem";
 
-export function EditLabelList({ labels }: { labels: Label[] }) {
+export default function EditLabelList() {
+  const labels = useLabelStore((state) => state.labels);
+
   return (
     <ul data-test-id="label-list">
       {labels.map((label) => (
