@@ -17,11 +17,11 @@ export default function EditLabelItem({ label }: { label: Label }) {
   }));
 
   function handleUpdateLabel() {
-    const findLabel = labels.findIndex(
-      (label) => label.labelName === labelName
-    );
+    if (labelName === "") return;
 
-    if (labelName !== label.labelName && labelName !== "" && findLabel === -1) {
+    const findLabel = labels.find((label) => label.labelName === labelName);
+
+    if (labelName === label.labelName || findLabel === undefined) {
       updateLabel({ id: label.id, labelName });
       setOpenUpdateInput(false);
     }
@@ -60,7 +60,9 @@ export default function EditLabelItem({ label }: { label: Label }) {
             }
           }}
         />
-      ) : label.labelName}
+      ) : (
+        label.labelName
+      )}
       {openUpdateInput ? (
         <Button
           icon

@@ -31,10 +31,10 @@ export default function Sidebar() {
     <>
       <nav
         className={clsx(
-          openSidebar || visibleOnHover ? "w-72" : "w-16",
+          openSidebar || visibleOnHover ? "w-72" : "w-20",
           visibleOnHover && "shadow-lg-darker",
           openSidebar && "shadow-lg-darker md:shadow-none",
-          "fixed top-14 left-0 bottom-0 pt-4 z-20 duration-200 ease-in-out bg-primary"
+          "fixed top-14 left-0 bottom-0 pt-4 z-20 duration-200 ease-in-out bg-primary overflow-y-auto"
         )}
         onMouseEnter={hoverToggle}
         onMouseLeave={hoverToggle}
