@@ -3,13 +3,15 @@ import Input from "~/components/ui/Input";
 import { Search } from "react-feather";
 import { useState, ChangeEvent, useEffect } from "react";
 import { useLabelStore } from "~/store/labelStore";
-import { Label } from '~/types'
+import { Label } from "~/types";
 
 interface SearchLabelInputProps {
-	setSearchResults: (result: Label[]) => void
+  setSearchResults: (result: Label[]) => void;
 }
 
-export default function SearchLabelInput({ setSearchResults }: SearchLabelInputProps) {
+export default function SearchLabelInput({
+  setSearchResults,
+}: SearchLabelInputProps) {
   const [searchValue, setSearchValue] = useState("");
   const searchLabel = useLabelStore((state) => state.searchLabel);
 

@@ -6,7 +6,10 @@ interface SearchLabelListProps {
   note: Note;
 }
 
-export default function SearchLabelList({labels, note }: SearchLabelListProps) {
+export default function SearchLabelList({
+  labels,
+  note,
+}: SearchLabelListProps) {
   return (
     <ul data-test-id="search-label-list">
       {labels.map((label) => {

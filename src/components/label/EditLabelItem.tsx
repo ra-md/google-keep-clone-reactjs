@@ -5,6 +5,7 @@ import Button from "~/components/ui/Button";
 import { Check, Edit2, Tag, Trash2 } from "react-feather";
 import Input from "~/components/ui/Input";
 import { iconSize } from "~/utils/constants";
+import clsx from "clsx";
 
 export default function EditLabelItem({ label }: { label: Label }) {
   const [openDeleteBtn, setopenDeleteBtn] = useState(false);
@@ -17,7 +18,7 @@ export default function EditLabelItem({ label }: { label: Label }) {
   }));
 
   function handleUpdateLabel() {
-    if (labelName === "") return;
+    if (labelName === "" || labelName.length > 40) return;
 
     const findLabel = labels.find((label) => label.labelName === labelName);
 
@@ -41,17 +42,15 @@ export default function EditLabelItem({ label }: { label: Label }) {
       onMouseEnter={() => setopenDeleteBtn(true)}
       onMouseLeave={() => setopenDeleteBtn(false)}
     >
-      <Button
-        icon
-        onClick={handleDeleteLabel}
-        aria-label="Delete label"
-        dataTip="Delete label"
-      >
+      <Button icon onClick={handleDeleteLabel} aria-label="Delete label">
         {openDeleteBtn ? <Trash2 size={iconSize} /> : <Tag size={iconSize} />}
       </Button>
       {openUpdateInput ? (
         <Input
-          className="border-b border-secondary py-1 mx-3"
+          className={clsx(
+            `border-b py-1 mx-3`,
+            labelName.length > 40 || labelName === "" ? "border-red-500" : "border-secondary"
+          )}
           value={labelName}
           onChange={(event) => setLabelName(event.target.value)}
           onKeyDown={(event) => {
@@ -61,15 +60,10 @@ export default function EditLabelItem({ label }: { label: Label }) {
           }}
         />
       ) : (
-        label.labelName
+        <p style={{ wordBreak: "break-all" }}>{label.labelName}</p>
       )}
       {openUpdateInput ? (
-        <Button
-          icon
-          onClick={handleUpdateLabel}
-          aria-label="Save label"
-          dataTip="Save label"
-        >
+        <Button icon onClick={handleUpdateLabel} aria-label="Save label">
           <Check size={iconSize} />
         </Button>
       ) : (
@@ -77,7 +71,6 @@ export default function EditLabelItem({ label }: { label: Label }) {
           icon
           onClick={() => setOpenUpdateInput(true)}
           aria-label="Rename label"
-          dataTip="Rename label"
         >
           <Edit2 size={iconSize} />
         </Button>

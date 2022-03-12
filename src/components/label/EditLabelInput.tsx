@@ -5,24 +5,28 @@ import Button from "~/components/ui/Button";
 import { v4 as uuidv4 } from "uuid";
 import { useLabelStore } from "~/store/labelStore";
 import { iconSize } from "~/utils/constants";
+import clsx from "clsx";
 
 export default function EditLabelInput() {
   const [labelName, setLabelName] = useState("");
+  const [blur, setBlur] = useState("");
   const { createLabel, labels } = useLabelStore(({ labels, createLabel }) => ({
     labels,
     createLabel,
   }));
 
   function createNewLabel() {
+    if(labelName === "" || labelName.length > 40)return
     const findLabel = labels.findIndex(
       (label) => label.labelName === labelName
     );
-    if (labelName !== "" && findLabel === -1) {
+    if (findLabel === -1) {
       createLabel({
         id: uuidv4(),
         labelName: labelName,
       });
       setLabelName("");
+      setBlur(false)
     }
   }
 
@@ -38,7 +42,11 @@ export default function EditLabelInput() {
       </Button>
       <Input
         placeholder="Create new label"
-        className="border-b border-secondary py-1 mx-3"
+        className={clsx(
+          `border-b border-secondary py-1 mx-3`,
+          blur && labelName === "" || blur && labelName.length > 40 ? "border-red-500" : "border-secondary"
+        )}
+        onBlur={() => setBlur(true)}
         value={labelName}
         onChange={(event) => setLabelName(event.target.value)}
         onKeyDown={(event) => {
