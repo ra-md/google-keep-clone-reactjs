@@ -9,14 +9,14 @@ import clsx from "clsx";
 
 export default function EditLabelInput() {
   const [labelName, setLabelName] = useState("");
-  const [blur, setBlur] = useState("");
+  const [blur, setBlur] = useState(false);
   const { createLabel, labels } = useLabelStore(({ labels, createLabel }) => ({
     labels,
     createLabel,
   }));
 
   function createNewLabel() {
-    if(labelName === "" || labelName.length > 40)return
+    if (labelName === "" || labelName.length > 40) return
     const findLabel = labels.findIndex(
       (label) => label.labelName === labelName
     );
