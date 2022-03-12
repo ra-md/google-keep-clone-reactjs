@@ -3,6 +3,7 @@ import Input from "~/components/ui/Input";
 import { Search } from "react-feather";
 import { useState, ChangeEvent, useEffect } from "react";
 import { useLabelStore } from "~/store/labelStore";
+import { Label } from '~/types'
 
 interface SearchLabelInputProps {
 	setSearchResults: (result: Label[]) => void
