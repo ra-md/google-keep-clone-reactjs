@@ -20,7 +20,7 @@ export default function Modal({ toggle, children, visible }: ModalProps) {
         <span className="inline-block h-screen align-middle" aria-hidden="true">
           &#8203;
         </span>
-        <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-primary shadow-xl border border-secondary rounded-lg">
+        <div className="inline-block w-full max-w-md p-4 my-8 overflow-hidden text-left align-middle transition-all transform bg-primary shadow-xl border border-secondary rounded-lg">
           {children}
         </div>
       </div>
