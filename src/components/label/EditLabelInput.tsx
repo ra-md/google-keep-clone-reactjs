@@ -50,8 +50,8 @@ export default function EditLabelInput() {
       <Button
         icon
         onClick={createNewLabel}
-        aria-label="Save label"
-        dataTip="Save label"
+        aria-label="Create new label"
+        dataTip="Create new label"
       >
         <Check size={iconSize} />
       </Button>

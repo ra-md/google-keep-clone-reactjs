@@ -2,7 +2,7 @@ import { test, expect, Page } from "@playwright/test";
 
 const editLabelsSelector = '[aria-label="Edit labels"]';
 const createLabelInputSelector = '[placeholder="Create new label"]';
-const saveLabelSelector = '[aria-label="Save label"]';
+const saveLabelButtonSelector = '[aria-label="Create new label"]';
 const closeEditLabelSelector = '[aria-label="Close edit label"]';
 const openAddLabelSelector = '[aria-label="Add label"]';
 const closeAddLabelSelector = '[aria-label="Close add label"]';
@@ -27,7 +27,7 @@ test.describe("Label", () => {
     await page.locator(editLabelsSelector).click();
 
     await page.locator(createLabelInputSelector).fill(labels[0]);
-    await page.locator(saveLabelSelector).click();
+    await page.locator(saveLabelButtonSelector).click();
     await expect(page.locator(labelListSelector)).toContainText(labels[0]);
 
     await page.locator(closeEditLabelSelector).click();
@@ -42,7 +42,7 @@ test.describe("Label", () => {
 
     await page.locator(editLabelsSelector).click();
     await page.locator(createLabelInputSelector).fill(labels[1]);
-    await page.locator(saveLabelSelector).click();
+    await page.locator(saveLabelButtonSelector).click();
     await expect(page.locator(labelListSelector)).toContainText(labels);
 
     await page.locator(closeEditLabelSelector).click();
@@ -57,12 +57,12 @@ test.describe("Label", () => {
     await page.locator(editLabelsSelector).click();
 
     await page.locator(createLabelInputSelector).fill(labels[0]);
-    await page.locator(saveLabelSelector).click();
+    await page.locator(saveLabelButtonSelector).click();
 
     const updateLabel = "update label 1";
 
     await page.locator(createLabelInputSelector).fill(updateLabel);
-    await page.locator(saveLabelSelector).click();
+    await page.locator(saveLabelButtonSelector).click();
     await expect(page.locator(labelListSelector)).toContainText(updateLabel);
 
     await page.locator(closeEditLabelSelector).click();
@@ -78,7 +78,7 @@ test.describe("Label", () => {
     await page.locator(editLabelsSelector).click();
 
     await page.locator(createLabelInputSelector).fill(labels[0]);
-    await page.locator(saveLabelSelector).click();
+    await page.locator(saveLabelButtonSelector).click();
 
     await page.locator('[aria-label="Delete label"]').click();
     await expect(page.locator(labelListSelector)).not.toContainText(labels[0]);
@@ -100,7 +100,7 @@ test.describe("Add label and remove label", () => {
     await page.locator(editLabelsSelector).click();
 
     await page.locator(createLabelInputSelector).fill(labels[0]);
-    await page.locator(saveLabelSelector).click();
+    await page.locator(saveLabelButtonSelector).click();
 
     await page.locator(closeEditLabelSelector).click();
   });
@@ -152,10 +152,10 @@ test.describe("Search label", () => {
     await page.locator(editLabelsSelector).click();
 
     await page.locator(createLabelInputSelector).fill(labels[0]);
-    await page.locator(saveLabelSelector).click();
+    await page.locator(saveLabelButtonSelector).click();
 
     await page.locator(createLabelInputSelector).fill(labels[1]);
-    await page.locator(saveLabelSelector).click();
+    await page.locator(saveLabelButtonSelector).click();
 
     await page.locator(closeEditLabelSelector).click();
   });

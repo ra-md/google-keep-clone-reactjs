@@ -6,7 +6,7 @@ import { useRef, useCallback } from 'react'
 
 export default function EditLabelList() {
   const labels = useLabelStore((state) => state.labels);
-  const parentRef = useRef()
+  const parentRef = useRef<HTMLDivElement>(null)
 
   const rowVirtualizer = useVirtual({
     size: labels.length,
@@ -16,7 +16,7 @@ export default function EditLabelList() {
   return (
     <div
       ref={parentRef}
-      className="h-[400px] overflow-y-auto overflow-x-hidden"
+      className="max-h-[400px] overflow-y-auto overflow-x-hidden"
     >
       <ul
         data-test-id="label-list"
