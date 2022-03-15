@@ -19,7 +19,8 @@ export default function NoteItem({ note }: { note: NoteItemProps }) {
     note.noteText && note.noteText.length > 300
       ? `${note.noteText.slice(0, 300)}...`
       : note.noteText;
-  const slicedName = note.noteName && note.noteName.length > 100
+  const slicedName =
+    note.noteName && note.noteName.length > 100
       ? `${note.noteName.slice(0, 100)}...`
       : note.noteName;
 
