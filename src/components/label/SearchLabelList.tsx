@@ -1,7 +1,7 @@
 import SearchLabelItem from "./SearchLabelItem";
 import { Label, Note } from "~/types";
 import { useVirtual } from "react-virtual";
-import { useRef, useCallback } from "react";
+import { useRef } from "react";
 
 interface SearchLabelListProps {
   labels: Label[];

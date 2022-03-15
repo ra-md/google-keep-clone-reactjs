@@ -6,13 +6,7 @@ import { Note } from "~/types";
 import clsx from "clsx";
 import { useNoteStore } from "~/store/noteStore";
 import SearchLabel from "../label/SearchLabel";
-import {
-  Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogClose,
-  DialogTitle,
-} from "~/components/ui/Dialog";
+import { Dialog, DialogContent, DialogTitle } from "~/components/ui/Dialog";
 
 interface NoteItemProps extends Note {}
 

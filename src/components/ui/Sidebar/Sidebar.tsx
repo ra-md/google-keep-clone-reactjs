@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { sidebarAtom } from "./sidebarAtom";
 import { useAtom } from "jotai";
 import { Book, Edit2, Tag } from "react-feather";

@@ -4,7 +4,6 @@ import {
   ButtonHTMLAttributes,
   forwardRef,
 } from "react";
-import ReactTooltip from "react-tooltip";
 import clsx from "clsx";
 import {
   Tooltip,
@@ -31,11 +30,8 @@ interface ButtonProps
   icon?: boolean;
 }
 
-const Button = forwardRef(
-  (
-    { size = "big", className, dataTip, icon, ...props }: ButtonProps,
-    forwardedRef
-  ) => {
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ size = "big", className, dataTip, icon, ...props }, forwardedRef) => {
     const withoutTooltip = (
       <button
         ref={forwardedRef}

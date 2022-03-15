@@ -17,7 +17,10 @@ export default function NoteList({ notes }: NoteListProps) {
   }
 
   useEffect(() => {
-    const callback = (entries, observer) => {
+    const callback = (
+      entries: IntersectionObserverEntry[],
+      observer: IntersectionObserver
+    ) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           setInc((inc) => inc + 12);

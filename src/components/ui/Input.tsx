@@ -9,17 +9,19 @@ interface InputProps
   className?: string;
 }
 
-const Input = forwardRef(({ className, ...props }, forwardedRef) => {
-  return (
-    <input
-      className={clsx(
-        "h-full my-3 bg-transparent w-full font-semibold",
-        className
-      )}
-      ref={forwardedRef}
-      {...props}
-    />
-  );
-});
+const Input = forwardRef<HTMLInputElement, InputProps>(
+  ({ className, ...props }, forwardedRef) => {
+    return (
+      <input
+        className={clsx(
+          "h-full my-3 bg-transparent w-full font-semibold",
+          className
+        )}
+        ref={forwardedRef}
+        {...props}
+      />
+    );
+  }
+);
 
 export default Input;

@@ -1,17 +1,26 @@
 import { forwardRef } from "react";
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 
-const StyledContent = forwardRef((props, forwardedRef) => {
+const StyledContent = forwardRef<
+  HTMLDivElement,
+  TooltipPrimitive.TooltipContentProps
+>((props, forwardedRef) => {
   const { children } = props;
 
   return (
-    <TooltipPrimitive.Content className="rounded-md text-sm py-[5px] px-[8px] bg-secondary shadow-lg">
+    <TooltipPrimitive.Content
+      ref={forwardedRef}
+      className="rounded-md text-sm py-[5px] px-[8px] bg-secondary shadow-lg"
+    >
       {children}
     </TooltipPrimitive.Content>
   );
 });
 
-const StyledArrow = forwardRef((_, forwardedRef) => {
+const StyledArrow = forwardRef<
+  SVGSVGElement,
+  TooltipPrimitive.TooltipArrowProps
+>((_, forwardedRef) => {
   return (
     <TooltipPrimitive.Arrow className="fill-secondary" ref={forwardedRef} />
   );

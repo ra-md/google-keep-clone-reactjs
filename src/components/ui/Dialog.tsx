@@ -2,7 +2,10 @@ import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { forwardRef } from "react";
 import clsx from "clsx";
 
-const StyledOverlay = forwardRef((props, forwardedRef) => {
+const StyledOverlay = forwardRef<
+  HTMLDivElement,
+  DialogPrimitive.DialogOverlayProps
+>((props, forwardedRef) => {
   const { className } = props;
   return (
     <DialogPrimitive.Overlay
@@ -12,7 +15,10 @@ const StyledOverlay = forwardRef((props, forwardedRef) => {
   );
 });
 
-const StyledContent = forwardRef((props, forwardedRef) => {
+const StyledContent = forwardRef<
+  HTMLDivElement,
+  DialogPrimitive.DialogContentProps
+>((props, forwardedRef) => {
   const { className, children } = props;
   return (
     <DialogPrimitive.Content
@@ -28,20 +34,22 @@ const StyledContent = forwardRef((props, forwardedRef) => {
   );
 });
 
-const Title = forwardRef((props, forwardedRef) => {
-  const { className, children } = props;
+const Title = forwardRef<HTMLHeadingElement, DialogPrimitive.DialogTitleProps>(
+  (props, forwardedRef) => {
+    const { className, children } = props;
 
-  return (
-    <DialogPrimitive.Title
-      ref={forwardedRef}
-      className={clsx("font-semiblod", className)}
-    >
-      {children}
-    </DialogPrimitive.Title>
-  );
-});
+    return (
+      <DialogPrimitive.Title
+        ref={forwardedRef}
+        className={clsx("font-semiblod", className)}
+      >
+        {children}
+      </DialogPrimitive.Title>
+    );
+  }
+);
 
-function Content({ children, ...props }) {
+function Content({ children, ...props }: DialogPrimitive.DialogPortalProps) {
   return (
     <DialogPrimitive.Portal>
       <StyledOverlay />
