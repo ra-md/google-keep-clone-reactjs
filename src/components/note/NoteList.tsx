@@ -9,10 +9,8 @@ interface NoteListProps {
 }
 
 export default function NoteList({ notes }: NoteListProps) {
-  // const notes = Array(10).fill().map((_, i) => ({id: i, noteText: `note ${i}`, noteName: '', labelIds: []}))
-
   const loadingRef = useRef<HTMLHeadingElement>(null);
-  const [inc, setInc] = useState(24);
+  const [inc, setInc] = useState(12);
 
   if (notes.length === 0) {
     return <h1 className="text-center mt-8">Notes you add appear here</h1>;
@@ -22,7 +20,7 @@ export default function NoteList({ notes }: NoteListProps) {
     const callback = (entries, observer) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          setInc((inc) => inc + 10);
+          setInc((inc) => inc + 12);
         }
       });
     };
@@ -53,7 +51,7 @@ export default function NoteList({ notes }: NoteListProps) {
           return <NoteItem key={note.id} note={note} />;
         })}
       </Masonry>
-      {notes.length > 24 && inc < notes.length && (
+      {notes.length > 12 && inc < notes.length && (
         <div ref={loadingRef} className="mb-4">
           <Spinner />
         </div>

@@ -18,6 +18,7 @@ interface NoteItemProps extends Note {}
 
 export default function NoteItem({ note }: { note: NoteItemProps }) {
   const [openUpdateNote, setOpenUpdateNote] = useState(false);
+  const [openAddLabel, setOpenAddLabel] = useState(false);
   const deleteNote = useNoteStore((state) => state.deleteNote);
 
   const slicedNote =
@@ -25,89 +26,71 @@ export default function NoteItem({ note }: { note: NoteItemProps }) {
       ? `${note.noteText.slice(0, 300)}...`
       : note.noteText;
 
+  function updateNoteToggle() {
+    setOpenUpdateNote(!openUpdateNote)
+  }
+
+  function addLabelToggle() {
+    setOpenAddLabel(!openAddLabel)
+  }
+
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <li
-          className={clsx(
-            "border relative border-secondary rounded-lg mb-5 bg-primary break-words w-full md:w-60"
-            // openUpdateNote && "opacity-0"
-          )}
-        >
-          <div aria-label="update this note" className="px-4 py-2">
-            <div className="mb-6">
-              <h1>{note.noteName}</h1>
-              <p>{slicedNote}</p>
-            </div>
-            <div
-              className={`flex justify-end absolute inset-0 items-end opacity-0 hover:opacity-100 focus:opacity-100 duration-200 ease-in-out mb-0.5 mr-0.5`}
-            >
-              <Button
-                icon
-                aria-label="Delete note"
-                onClick={(event) => {
-                  event.stopPropagation();
-                  deleteNote(note.id);
-                }}
-              >
-                <Trash2 size={17} />
-              </Button>
-            </div>
+    <>
+      <li
+        className={clsx(
+          "border relative border-secondary rounded-lg mb-5 bg-primary break-words w-full md:w-60",
+          openUpdateNote && "opacity-0"
+        )}
+        onClick={updateNoteToggle}
+      >
+        <div aria-label="update this note" className="px-4 py-2">
+          <div className="mb-6">
+            <h1>{note.noteName}</h1>
+            <p>{slicedNote}</p>
           </div>
-        </li>
-      </DialogTrigger>
-      <DialogContent>
-        <DialogTitle>Update note</DialogTitle>
-        <UpdateNote
-          noteName={note.noteName!}
-          noteText={note.noteText!}
-          id={note.id}
-          labelIds={note.labelIds}
-        />
-      </DialogContent>
-    </Dialog>
+          <div
+            className={`flex justify-end absolute inset-0 items-end opacity-0 hover:opacity-100 focus:opacity-100 duration-200 ease-in-out mb-0.5 mr-0.5`}
+          >
+            <Button
+              icon
+              aria-label="Add label"
+              onClick={(event) => {
+                event.stopPropagation();
+                addLabelToggle()
+              }}
+            >
+              <Tag size={17} />
+            </Button>
+            <Button
+              icon
+              aria-label="Delete note"
+              onClick={(event) => {
+                event.stopPropagation();
+                deleteNote(note.id);
+              }}
+            >
+              <Trash2 size={17} />
+            </Button>
+          </div>
+        </div>
+      </li>
+      <Dialog open={openUpdateNote} onOpenChange={updateNoteToggle}>
+        <DialogContent>
+          <DialogTitle>Update note</DialogTitle>
+          <UpdateNote
+            note={note}
+            onOpenChange={updateNoteToggle}
+          />
+        </DialogContent>
+      </Dialog>
+      <Dialog open={openAddLabel} onOpenChange={addLabelToggle}>
+        <DialogContent>
+          <DialogTitle>Add label</DialogTitle>
+          <SearchLabel
+            note={note}
+          />
+        </DialogContent>
+      </Dialog>
+    </>
   );
-}
-
-{
-  /*<Button
-  icon
-  dataTip="Add label"
-  aria-label="Add label"
-  onClick={(event) => {
-    event.stopPropagation();
-    setOpenSearchLabel(true);
-  }}
->
-  <Tag size={17} />
-</Button>
-<Button
-  icon
-  dataTip="Delete note"
-  aria-label="Delete note"
-  onClick={(event) => {
-    event.stopPropagation();
-    deleteNote(note.id);
-  }}
->
-  <Trash2 size={17} />
-</Button>*/
-}
-
-{
-  /*<UpdateNote
-        visible={openUpdateNote}
-        toggle={() => setOpenUpdateNote(!openUpdateNote)}
-        noteName={note.noteName!}
-        noteText={note.noteText!}
-        id={note.id}
-        labelIds={note.labelIds || []}
-      />*/
-}
-{
-  /*<SearchLabel
-        note={note}
-        visible={openSearchLabel}
-        toggle={() => setOpenSearchLabel(!openSearchLabel)}
-      />*/
 }

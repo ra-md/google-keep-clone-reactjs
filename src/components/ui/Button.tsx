@@ -34,7 +34,8 @@ const Button = forwardRef(
       <button
         ref={forwardedRef}
         className={clsx(
-          "flex items-center justify-center focus:bg-secondary hover:bg-hover",
+          `flex items-center justify-center focus:bg-secondary hover:bg-hover
+          hover:disabled:bg-transparent disabled:text-gray-600 disabled:cursor-not-allowed`,
           Boolean(icon) ? "p-2 rounded-full" : sizeClassnames[size],
           className
         )}

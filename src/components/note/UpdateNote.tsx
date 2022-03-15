@@ -7,50 +7,51 @@ import NoteLabels from "./NoteLabels";
 import { Note } from "~/types";
 import { DialogClose } from "~/components/ui/Dialog";
 
-interface UpdateNoteProps extends Note {
-  visible: boolean;
-  toggle: () => void;
+interface UpdateNoteProps {
+  note: Note;
+  onOpenChange: () => void
 }
 
-export default function UpdateNote(props: UpdateNoteProps) {
-  const [title, setTitle] = useState("");
-  const [note, setNote] = useState("");
-
+export default function UpdateNote({note, onOpenChange}: UpdateNoteProps) {
+  const [name, setName] = useState("");
+  const [text, setText] = useState("");
   const updateNote = useNoteStore((state) => state.updateNote);
+  const disabled = name === note.noteName && text === note.noteText || name === '' && text === ''
 
   useEffect(() => {
-    setTitle(props.noteName!);
-    setNote(props.noteText!);
-  }, [props.noteName, props.noteText]);
+    setName(note.noteName!);
+    setText(note.noteText!);
+  }, [note.noteName, note.noteText]);
 
   function handleUpdate() {
-    if (title !== props.noteName || note !== props.noteText) {
-      updateNote({
-        noteName: title,
-        noteText: note,
-        id: props.id,
-        labelIds: props.labelIds,
-      });
-    }
+    if (disabled) return
+
+    updateNote({
+      noteName: name,
+      noteText: text,
+      id: note.id,
+      labelIds: note.labelIds,
+    });
+    onOpenChange()
   }
 
   return (
     <>
       <Input
-        onChange={(event) => setTitle(event.target.value)}
-        value={title}
+        onChange={(event) => setName(event.target.value)}
+        value={name}
         placeholder="Title"
       />
       <TextareaAutoSize
-        onChange={(event) => setNote(event.target.value)}
-        value={note}
+        onChange={(event) => setText(event.target.value)}
+        value={text}
         className="textarea max-h-96"
         placeholder="Take a note..."
       />
 
       <div className="flex items-center mt-2 justify-between">
         <div className="note-label-list">
-          <NoteLabels labelId={props.labelIds} noteId={props.id} />
+          <NoteLabels labelId={note.labelIds} noteId={note.id} />
         </div>
         <div className="flex">
           <DialogClose asChild>
@@ -62,15 +63,14 @@ export default function UpdateNote(props: UpdateNoteProps) {
               Close
             </Button>
           </DialogClose>
-          <DialogClose asChild>
-            <Button
-              size="small"
-              aria-label="update note"
-              onClick={handleUpdate}
-            >
-              Update
-            </Button>
-          </DialogClose>
+          <Button
+            size="small"
+            aria-label="update note"
+            onClick={handleUpdate}
+            disabled={disabled}
+          >
+            Update
+          </Button>
         </div>
       </div>
     </>
