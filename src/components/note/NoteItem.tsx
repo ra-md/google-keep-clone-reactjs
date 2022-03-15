@@ -11,7 +11,7 @@ import {
   DialogTrigger,
   DialogContent,
   DialogClose,
-  DialogTitle
+  DialogTitle,
 } from "~/components/ui/Dialog";
 
 interface NoteItemProps extends Note {}
@@ -27,11 +27,11 @@ export default function NoteItem({ note }: { note: NoteItemProps }) {
       : note.noteText;
 
   function updateNoteToggle() {
-    setOpenUpdateNote(!openUpdateNote)
+    setOpenUpdateNote(!openUpdateNote);
   }
 
   function addLabelToggle() {
-    setOpenAddLabel(!openAddLabel)
+    setOpenAddLabel(!openAddLabel);
   }
 
   return (
@@ -56,7 +56,7 @@ export default function NoteItem({ note }: { note: NoteItemProps }) {
               aria-label="Add label"
               onClick={(event) => {
                 event.stopPropagation();
-                addLabelToggle()
+                addLabelToggle();
               }}
             >
               <Tag size={17} />
@@ -77,18 +77,13 @@ export default function NoteItem({ note }: { note: NoteItemProps }) {
       <Dialog open={openUpdateNote} onOpenChange={updateNoteToggle}>
         <DialogContent>
           <DialogTitle>Update note</DialogTitle>
-          <UpdateNote
-            note={note}
-            onOpenChange={updateNoteToggle}
-          />
+          <UpdateNote note={note} onOpenChange={updateNoteToggle} />
         </DialogContent>
       </Dialog>
       <Dialog open={openAddLabel} onOpenChange={addLabelToggle}>
         <DialogContent>
           <DialogTitle>Add label</DialogTitle>
-          <SearchLabel
-            note={note}
-          />
+          <SearchLabel note={note} />
         </DialogContent>
       </Dialog>
     </>

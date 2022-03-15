@@ -9,14 +9,16 @@ import { DialogClose } from "~/components/ui/Dialog";
 
 interface UpdateNoteProps {
   note: Note;
-  onOpenChange: () => void
+  onOpenChange: () => void;
 }
 
-export default function UpdateNote({note, onOpenChange}: UpdateNoteProps) {
+export default function UpdateNote({ note, onOpenChange }: UpdateNoteProps) {
   const [name, setName] = useState("");
   const [text, setText] = useState("");
   const updateNote = useNoteStore((state) => state.updateNote);
-  const disabled = name === note.noteName && text === note.noteText || name === '' && text === ''
+  const disabled =
+    (name === note.noteName && text === note.noteText) ||
+    (name === "" && text === "");
 
   useEffect(() => {
     setName(note.noteName!);
@@ -24,7 +26,7 @@ export default function UpdateNote({note, onOpenChange}: UpdateNoteProps) {
   }, [note.noteName, note.noteText]);
 
   function handleUpdate() {
-    if (disabled) return
+    if (disabled) return;
 
     updateNote({
       noteName: name,
@@ -32,7 +34,7 @@ export default function UpdateNote({note, onOpenChange}: UpdateNoteProps) {
       id: note.id,
       labelIds: note.labelIds,
     });
-    onOpenChange()
+    onOpenChange();
   }
 
   return (

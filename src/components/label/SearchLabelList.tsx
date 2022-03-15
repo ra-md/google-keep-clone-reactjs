@@ -47,7 +47,7 @@ export default function SearchLabelList({
         })}
       </ul>
     </div>
-  )
+  );
 
   // return (
   //   <ul data-test-id="search-label-list">

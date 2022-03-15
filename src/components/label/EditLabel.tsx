@@ -1,11 +1,7 @@
 import Button from "~/components/ui/Button";
 import EditLabelList from "./EditLabelList";
 import EditLabelInput from "./EditLabelInput";
-import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-} from "~/components/ui/Dialog";
+import { Dialog, DialogContent, DialogTitle } from "~/components/ui/Dialog";
 
 interface EditLabelProps {
   visible: boolean;
