@@ -42,7 +42,12 @@ export default function EditLabelItem({ label }: { label: Label }) {
       onMouseEnter={() => setopenDeleteBtn(true)}
       onMouseLeave={() => setopenDeleteBtn(false)}
     >
-      <Button icon onClick={handleDeleteLabel} aria-label="Delete label">
+      <Button
+        icon
+        onClick={handleDeleteLabel}
+        dataTip="Delete label"
+        aria-label="Delete label"
+      >
         {openDeleteBtn ? <Trash2 size={iconSize} /> : <Tag size={iconSize} />}
       </Button>
       {openUpdateInput ? (
@@ -65,13 +70,19 @@ export default function EditLabelItem({ label }: { label: Label }) {
         <p style={{ wordBreak: "break-all" }}>{label.labelName}</p>
       )}
       {openUpdateInput ? (
-        <Button icon onClick={handleUpdateLabel} aria-label="Save label">
+        <Button
+          icon
+          onClick={handleUpdateLabel}
+          dataTip="Save label"
+          aria-label="Save label"
+        >
           <Check size={iconSize} />
         </Button>
       ) : (
         <Button
           icon
           onClick={() => setOpenUpdateInput(true)}
+          dataTip="Rename label"
           aria-label="Rename label"
         >
           <Edit2 size={iconSize} />

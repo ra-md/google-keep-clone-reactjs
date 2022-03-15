@@ -54,6 +54,7 @@ export default function NoteItem({ note }: { note: NoteItemProps }) {
             <Button
               icon
               aria-label="Add label"
+              dataTip="Add label"
               onClick={(event) => {
                 event.stopPropagation();
                 addLabelToggle();
@@ -64,6 +65,7 @@ export default function NoteItem({ note }: { note: NoteItemProps }) {
             <Button
               icon
               aria-label="Delete note"
+              dataTip="Delete note"
               onClick={(event) => {
                 event.stopPropagation();
                 deleteNote(note.id);

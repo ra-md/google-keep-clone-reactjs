@@ -6,6 +6,12 @@ import {
 } from "react";
 import ReactTooltip from "react-tooltip";
 import clsx from "clsx";
+import {
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+  TooltipArrow,
+} from "./Tooltip";
 
 const sizeClassnames = {
   big: "py-2 px-6 text-sm rounded-lg",
@@ -30,7 +36,7 @@ const Button = forwardRef(
     { size = "big", className, dataTip, icon, ...props }: ButtonProps,
     forwardedRef
   ) => {
-    return (
+    const withoutTooltip = (
       <button
         ref={forwardedRef}
         className={clsx(
@@ -43,6 +49,20 @@ const Button = forwardRef(
       >
         {props.children}
       </button>
+    );
+
+    if (!dataTip) {
+      return withoutTooltip;
+    }
+
+    return (
+      <Tooltip>
+        <TooltipTrigger asChild>{withoutTooltip}</TooltipTrigger>
+        <TooltipContent sideOffset={5}>
+          {dataTip}
+          <TooltipArrow />
+        </TooltipContent>
+      </Tooltip>
     );
   }
 );
