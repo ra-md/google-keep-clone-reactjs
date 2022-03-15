@@ -1,4 +1,9 @@
-import { ReactNode, DetailedHTMLProps, ButtonHTMLAttributes } from "react";
+import {
+  ReactNode,
+  DetailedHTMLProps,
+  ButtonHTMLAttributes,
+  forwardRef,
+} from "react";
 import ReactTooltip from "react-tooltip";
 import clsx from "clsx";
 
@@ -20,17 +25,14 @@ interface ButtonProps
   icon?: boolean;
 }
 
-export default function Button({
-  size = "big",
-  className,
-  dataTip,
-  icon,
-  ...props
-}: ButtonProps) {
-  return (
-    <>
+const Button = forwardRef(
+  (
+    { size = "big", className, dataTip, icon, ...props }: ButtonProps,
+    forwardedRef
+  ) => {
+    return (
       <button
-        data-tip={dataTip}
+        ref={forwardedRef}
         className={clsx(
           "flex items-center justify-center focus:bg-secondary hover:bg-hover",
           Boolean(icon) ? "p-2 rounded-full" : sizeClassnames[size],
@@ -40,14 +42,8 @@ export default function Button({
       >
         {props.children}
       </button>
-      {dataTip && (
-        <ReactTooltip
-          place="bottom"
-          backgroundColor="#404040"
-          aria-haspopup="true"
-          effect="solid"
-        />
-      )}
-    </>
-  );
-}
+    );
+  }
+);
+
+export default Button;

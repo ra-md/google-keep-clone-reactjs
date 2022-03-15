@@ -63,7 +63,7 @@ export default function Sidebar() {
                     transform: `translateY(${virtualRow.start}px)`,
                   }}
                 >
-                  {'labelName' in sidebarMenu[virtualRow.index] ? (
+                  {"labelName" in sidebarMenu[virtualRow.index] ? (
                     <SidebarItem
                       icon={<Tag />}
                       name={sidebarMenu[virtualRow.index].labelName}

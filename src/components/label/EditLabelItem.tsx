@@ -49,7 +49,9 @@ export default function EditLabelItem({ label }: { label: Label }) {
         <Input
           className={clsx(
             `border-b py-1 mx-3`,
-            labelName.length > 40 || labelName === "" ? "border-red-500" : "border-secondary"
+            labelName.length > 40 || labelName === ""
+              ? "border-red-500"
+              : "border-secondary"
           )}
           value={labelName}
           onChange={(event) => setLabelName(event.target.value)}

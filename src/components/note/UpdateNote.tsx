@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import TextareaAutoSize from "react-textarea-autosize";
 import Input from "~/components/ui/Input";
-import Modal from "~/components/ui/Modal";
 import Button from "~/components/ui/Button";
 import { useNoteStore } from "~/store/noteStore";
 import NoteLabels from "./NoteLabels";
 import { Note } from "~/types";
+import { DialogClose } from "~/components/ui/Dialog";
 
 interface UpdateNoteProps extends Note {
   visible: boolean;
@@ -24,7 +24,6 @@ export default function UpdateNote(props: UpdateNoteProps) {
   }, [props.noteName, props.noteText]);
 
   function handleUpdate() {
-    props.toggle();
     if (title !== props.noteName || note !== props.noteText) {
       updateNote({
         noteName: title,
@@ -36,7 +35,7 @@ export default function UpdateNote(props: UpdateNoteProps) {
   }
 
   return (
-    <Modal visible={props.visible} toggle={handleUpdate}>
+    <>
       <Input
         onChange={(event) => setTitle(event.target.value)}
         value={title}
@@ -49,17 +48,31 @@ export default function UpdateNote(props: UpdateNoteProps) {
         placeholder="Take a note..."
       />
 
-      <div className="note-label-list flex items-center mt-2">
-        <NoteLabels labelId={props.labelIds} noteId={props.id} />
-        <Button
-          className="ml-auto"
-          size="small"
-          aria-label="close update note dialog"
-          onClick={handleUpdate}
-        >
-          Close
-        </Button>
+      <div className="flex items-center mt-2 justify-between">
+        <div className="note-label-list">
+          <NoteLabels labelId={props.labelIds} noteId={props.id} />
+        </div>
+        <div className="flex">
+          <DialogClose asChild>
+            <Button
+              className="mr-2"
+              size="small"
+              aria-label="close update note dialog"
+            >
+              Close
+            </Button>
+          </DialogClose>
+          <DialogClose asChild>
+            <Button
+              size="small"
+              aria-label="update note"
+              onClick={handleUpdate}
+            >
+              Update
+            </Button>
+          </DialogClose>
+        </div>
       </div>
-    </Modal>
+    </>
   );
 }

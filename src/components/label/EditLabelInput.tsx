@@ -16,7 +16,7 @@ export default function EditLabelInput() {
   }));
 
   function createNewLabel() {
-    if (labelName === "" || labelName.length > 40) return
+    if (labelName === "" || labelName.length > 40) return;
     const findLabel = labels.findIndex(
       (label) => label.labelName === labelName
     );
@@ -26,7 +26,7 @@ export default function EditLabelInput() {
         labelName: labelName,
       });
       setLabelName("");
-      setBlur(false)
+      setBlur(false);
     }
   }
 
@@ -44,7 +44,9 @@ export default function EditLabelInput() {
         placeholder="Create new label"
         className={clsx(
           `border-b border-secondary py-1 mx-3`,
-          blur && labelName === "" || blur && labelName.length > 40 ? "border-red-500" : "border-secondary"
+          (blur && labelName === "") || (blur && labelName.length > 40)
+            ? "border-red-500"
+            : "border-secondary"
         )}
         onBlur={() => setBlur(true)}
         value={labelName}
