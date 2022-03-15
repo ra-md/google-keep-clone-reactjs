@@ -12,10 +12,6 @@ export default function NoteList({ notes }: NoteListProps) {
   const loadingRef = useRef<HTMLHeadingElement>(null);
   const [inc, setInc] = useState(12);
 
-  if (notes.length === 0) {
-    return <h1 className="text-center mt-8">Notes you add appear here</h1>;
-  }
-
   useEffect(() => {
     const callback = (
       entries: IntersectionObserverEntry[],
@@ -38,6 +34,10 @@ export default function NoteList({ notes }: NoteListProps) {
       observer.observe(loadingRef.current);
     }
   }, []);
+
+  if (notes.length === 0) {
+    return <h1 className="text-center mt-8">Notes you add appear here</h1>;
+  }
 
   return (
     <>
