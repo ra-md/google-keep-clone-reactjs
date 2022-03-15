@@ -24,8 +24,9 @@ const StyledContent = forwardRef<
     <DialogPrimitive.Content
       ref={forwardedRef}
       className={clsx(
-        `fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full 
-          max-w-md p-4 overflow-hidden text-left bg-primary border border-secondary rounded-lg z-50`,
+        `fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full md:max-w-md
+         max-w-[90%] p-4 overflow-hidden text-left bg-primary border border-secondary rounded-lg z-50
+        `,
         className
       )}
     >

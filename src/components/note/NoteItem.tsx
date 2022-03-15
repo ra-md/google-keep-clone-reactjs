@@ -15,10 +15,13 @@ export default function NoteItem({ note }: { note: NoteItemProps }) {
   const [openAddLabel, setOpenAddLabel] = useState(false);
   const deleteNote = useNoteStore((state) => state.deleteNote);
 
-  const slicedNote =
+  const slicedText =
     note.noteText && note.noteText.length > 300
       ? `${note.noteText.slice(0, 300)}...`
       : note.noteText;
+  const slicedName = note.noteName && note.noteName.length > 100
+      ? `${note.noteName.slice(0, 100)}...`
+      : note.noteName;
 
   function updateNoteToggle() {
     setOpenUpdateNote(!openUpdateNote);
@@ -39,8 +42,8 @@ export default function NoteItem({ note }: { note: NoteItemProps }) {
       >
         <div aria-label="update this note" className="px-4 py-2">
           <div className="mb-6">
-            <h1>{note.noteName}</h1>
-            <p>{slicedNote}</p>
+            <h1>{slicedName}</h1>
+            <p>{slicedText}</p>
           </div>
           <div
             className={`flex justify-end absolute inset-0 items-end opacity-0 hover:opacity-100 focus:opacity-100 duration-200 ease-in-out mb-0.5 mr-0.5`}
