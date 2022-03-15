@@ -13,7 +13,8 @@ const notes = [
 
 const textInputSelector = '[placeholder="Take a note..."]';
 const titleInputSelector = '[placeholder="Title"]';
-const closeSelector = '[aria-label="close create note"]';
+const closeCreateNoteSelector = '[aria-label="close create note"]';
+const updateNoteSelector = '[aria-label="update note"]';
 const searchInputSelector = '[placeholder="Search"]';
 const noteListSelector = ".note-list";
 
@@ -28,7 +29,7 @@ test.describe("Note", () => {
     await page.locator(textInputSelector).fill(notes[0].text);
     await page.locator(titleInputSelector).fill(notes[0].title);
 
-    await page.locator(closeSelector).click();
+    await page.locator(closeCreateNoteSelector).click();
 
     await expect(page.locator(noteListSelector)).toContainText([
       notes[0].text,
@@ -38,7 +39,7 @@ test.describe("Note", () => {
     await page.locator(textInputSelector).fill(notes[1].text);
     await page.locator(titleInputSelector).fill(notes[1].title);
 
-    await page.locator(closeSelector).click();
+    await page.locator(closeCreateNoteSelector).click();
 
     await expect(page.locator(noteListSelector)).toContainText(flatNotes);
 
@@ -51,7 +52,7 @@ test.describe("Note", () => {
     await page.locator(textInputSelector).fill(notes[0].text);
     await page.locator(titleInputSelector).fill(notes[0].title);
 
-    await page.locator(closeSelector).click();
+    await page.locator(closeCreateNoteSelector).click();
 
     await page.locator(textInputSelector).click();
 
@@ -63,7 +64,7 @@ test.describe("Note", () => {
     await page.locator(textInputSelector).fill(notes[0].text);
     await page.locator(titleInputSelector).fill(notes[0].title);
 
-    await page.locator(closeSelector).click();
+    await page.locator(closeCreateNoteSelector).click();
 
     await expect(page.locator(noteListSelector)).toContainText([
       notes[0].text,
@@ -82,20 +83,17 @@ test.describe("Note", () => {
     await page.locator(textInputSelector).fill(notes[0].text);
     await page.locator(titleInputSelector).fill(notes[0].title);
 
-    await page.locator(closeSelector).click();
-
-    await expect(page.locator(noteListSelector)).toContainText([
-      notes[0].text,
-      notes[0].title,
-    ]);
+    await page.locator(closeCreateNoteSelector).click();
 
     const updateText = "update note 1 text";
     const updateTitle = "update note 1 title";
 
-    await page.locator(textInputSelector).fill(updateText);
-    await page.locator(titleInputSelector).fill(updateTitle);
+    await page.locator('[aria-label="update this note"]').click()
 
-    await page.locator(closeSelector).click();
+    await page.locator(`[data-test-id="update title"]`).fill(updateText);
+    await page.locator(`[data-test-id="update text"]`).fill(updateTitle);
+
+    await page.locator(updateNoteSelector).click();
 
     await expect(page.locator(noteListSelector)).toContainText([
       updateTitle,
@@ -109,12 +107,12 @@ test.describe("Search notes", () => {
     await page.locator(textInputSelector).fill(notes[0].text);
     await page.locator(titleInputSelector).fill(notes[0].title);
 
-    await page.locator(closeSelector).click();
+    await page.locator(closeCreateNoteSelector).click();
 
     await page.locator(textInputSelector).fill(notes[1].text);
     await page.locator(titleInputSelector).fill(notes[1].title);
 
-    await page.locator(closeSelector).click();
+    await page.locator(closeCreateNoteSelector).click();
   });
 
   test('Should display "No matching results." when no there are no results', async ({

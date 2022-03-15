@@ -39,8 +39,9 @@ export default function NoteItem({ note }: { note: NoteItemProps }) {
           openUpdateNote && "opacity-0"
         )}
         onClick={updateNoteToggle}
+        aria-label="update this note"
       >
-        <div aria-label="update this note" className="px-4 py-2">
+        <div className="px-4 py-2">
           <div className="mb-6">
             <h1>{slicedName}</h1>
             <p>{slicedText}</p>

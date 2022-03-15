@@ -43,12 +43,14 @@ export default function UpdateNote({ note, onOpenChange }: UpdateNoteProps) {
         onChange={(event) => setName(event.target.value)}
         value={name}
         placeholder="Title"
+        data-test-id="update title"
       />
       <TextareaAutoSize
         onChange={(event) => setText(event.target.value)}
         value={text}
         className="textarea max-h-96"
         placeholder="Take a note..."
+        data-test-id="update text"
       />
 
       <div className="flex items-center mt-2 justify-between">
