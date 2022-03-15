@@ -20,7 +20,7 @@ export default function SearchLabel({note}: SearchLabelProps) {
       <div className="sticky top-0 rounded-lg bg-primary">
         <SearchLabelInput setSearchResults={setSearchResults} />
       </div>
-      <div className="px-3 max-h-96 overflow-y-auto">
+      <div className="max-h-96">
         {labels != null && (
           <SearchLabelList labels={labels} note={note} />
         )}
