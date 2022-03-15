@@ -22,7 +22,7 @@ export default function SidebarItem(props: SidebarItemProps) {
       className={clsx(
         visible ? "rounded-l-none pl-8 w-full" : "ml-5 w-12",
         isActive ? "bg-activeSidebarMenu" : "hover:bg-secondary",
-        "flex whitespace-nowrap overflow-hidden duration-200 ease-in-out rounded-full px-3 font-semibold cursor-pointer"
+        "flex whitespace-nowrap overflow-hidden duration-200 ease-in-out rounded-full font-semibold cursor-pointer"
       )}
     >
       {props.route ? <ItemLink {...props} /> : <ItemButton {...props} />}
@@ -48,7 +48,7 @@ function ItemButton(props: SidebarItemProps) {
 
 function Item(props: SidebarItemProps) {
   return (
-    <div className="flex py-3">
+    <div className="flex py-3 px-3">
       <div className="mr-8">{props.icon}</div>
       <span>{props.name}</span>
     </div>

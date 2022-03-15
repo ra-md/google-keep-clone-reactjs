@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.4.0",
+    "@radix-ui/react-dialog": "^0.1.7",
+    "@radix-ui/react-tooltip": "^0.1.7",
     "clsx": "^1.1.1",
     "jotai": "^1.2.2",
     "react": "^17.0.0",
@@ -19,7 +21,6 @@
     "react-masonry-component": "^6.3.0",
     "react-router-dom": "^5.2.0",
     "react-textarea-autosize": "^8.3.3",
-    "react-tooltip": "^4.2.21",
     "react-virtual": "^2.10.4",
     "uuid": "^8.3.2",
     "zustand": "^3.6.9"

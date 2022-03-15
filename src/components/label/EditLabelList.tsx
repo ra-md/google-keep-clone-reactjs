@@ -1,8 +1,7 @@
-import { Label } from "~/types";
 import { useLabelStore } from "~/store/labelStore";
 import EditLabelItem from "./EditLabelItem";
 import { useVirtual } from "react-virtual";
-import { useRef, useCallback } from "react";
+import { useRef } from "react";
 
 export default function EditLabelList() {
   const labels = useLabelStore((state) => state.labels);

@@ -1,4 +1,5 @@
-import { DetailedHTMLProps, InputHTMLAttributes } from "react";
+import { forwardRef, DetailedHTMLProps, InputHTMLAttributes } from "react";
+import clsx from "clsx";
 
 interface InputProps
   extends DetailedHTMLProps<
@@ -8,11 +9,19 @@ interface InputProps
   className?: string;
 }
 
-export default function Input({ className, ...props }: InputProps) {
-  return (
-    <input
-      className={`h-full my-3 bg-transparent w-full font-semibold ${className}`}
-      {...props}
-    />
-  );
-}
+const Input = forwardRef<HTMLInputElement, InputProps>(
+  ({ className, ...props }, forwardedRef) => {
+    return (
+      <input
+        className={clsx(
+          "h-full my-3 bg-transparent w-full font-semibold",
+          className
+        )}
+        ref={forwardedRef}
+        {...props}
+      />
+    );
+  }
+);
+
+export default Input;

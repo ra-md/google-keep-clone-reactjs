@@ -1,6 +1,16 @@
-import { ReactNode, DetailedHTMLProps, ButtonHTMLAttributes } from "react";
-import ReactTooltip from "react-tooltip";
+import {
+  ReactNode,
+  DetailedHTMLProps,
+  ButtonHTMLAttributes,
+  forwardRef,
+} from "react";
 import clsx from "clsx";
+import {
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+  TooltipArrow,
+} from "./Tooltip";
 
 const sizeClassnames = {
   big: "py-2 px-6 text-sm rounded-lg",
@@ -20,19 +30,14 @@ interface ButtonProps
   icon?: boolean;
 }
 
-export default function Button({
-  size = "big",
-  className,
-  dataTip,
-  icon,
-  ...props
-}: ButtonProps) {
-  return (
-    <>
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ size = "big", className, dataTip, icon, ...props }, forwardedRef) => {
+    const withoutTooltip = (
       <button
-        data-tip={dataTip}
+        ref={forwardedRef}
         className={clsx(
-          "flex items-center justify-center focus:bg-secondary hover:bg-hover",
+          `flex items-center justify-center focus:bg-secondary hover:bg-hover
+          hover:disabled:bg-transparent disabled:text-gray-600 disabled:cursor-not-allowed`,
           Boolean(icon) ? "p-2 rounded-full" : sizeClassnames[size],
           className
         )}
@@ -40,14 +45,22 @@ export default function Button({
       >
         {props.children}
       </button>
-      {dataTip && (
-        <ReactTooltip
-          place="bottom"
-          backgroundColor="#404040"
-          aria-haspopup="true"
-          effect="solid"
-        />
-      )}
-    </>
-  );
-}
+    );
+
+    if (!dataTip) {
+      return withoutTooltip;
+    }
+
+    return (
+      <Tooltip>
+        <TooltipTrigger asChild>{withoutTooltip}</TooltipTrigger>
+        <TooltipContent sideOffset={5}>
+          {dataTip}
+          <TooltipArrow />
+        </TooltipContent>
+      </Tooltip>
+    );
+  }
+);
+
+export default Button;

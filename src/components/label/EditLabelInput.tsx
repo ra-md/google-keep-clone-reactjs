@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Check, X } from "react-feather";
 import Input from "~/components/ui/Input";
 import Button from "~/components/ui/Button";
@@ -14,9 +14,16 @@ export default function EditLabelInput() {
     labels,
     createLabel,
   }));
+  const inputRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, []);
 
   function createNewLabel() {
-    if (labelName === "" || labelName.length > 40) return
+    if (labelName === "" || labelName.length > 40) return;
     const findLabel = labels.findIndex(
       (label) => label.labelName === labelName
     );
@@ -26,7 +33,7 @@ export default function EditLabelInput() {
         labelName: labelName,
       });
       setLabelName("");
-      setBlur(false)
+      setBlur(false);
     }
   }
 
@@ -41,10 +48,13 @@ export default function EditLabelInput() {
         <X size={iconSize} />
       </Button>
       <Input
+        ref={inputRef}
         placeholder="Create new label"
         className={clsx(
           `border-b border-secondary py-1 mx-3`,
-          blur && labelName === "" || blur && labelName.length > 40 ? "border-red-500" : "border-secondary"
+          (blur && labelName === "") || (blur && labelName.length > 40)
+            ? "border-red-500"
+            : "border-secondary"
         )}
         onBlur={() => setBlur(true)}
         value={labelName}

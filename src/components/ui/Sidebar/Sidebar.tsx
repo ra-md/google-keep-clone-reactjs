@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { sidebarAtom } from "./sidebarAtom";
 import { useAtom } from "jotai";
 import { Book, Edit2, Tag } from "react-feather";
@@ -63,7 +63,7 @@ export default function Sidebar() {
                     transform: `translateY(${virtualRow.start}px)`,
                   }}
                 >
-                  {'labelName' in sidebarMenu[virtualRow.index] ? (
+                  {"labelName" in sidebarMenu[virtualRow.index] ? (
                     <SidebarItem
                       icon={<Tag />}
                       name={sidebarMenu[virtualRow.index].labelName}

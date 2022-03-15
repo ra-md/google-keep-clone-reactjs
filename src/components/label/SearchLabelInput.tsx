@@ -1,7 +1,7 @@
 import { iconSize } from "~/utils/constants";
 import Input from "~/components/ui/Input";
 import { Search } from "react-feather";
-import { useState, ChangeEvent, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useLabelStore } from "~/store/labelStore";
 import { Label } from "~/types";
 

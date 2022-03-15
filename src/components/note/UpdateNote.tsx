@@ -1,65 +1,82 @@
 import { useState, useEffect } from "react";
 import TextareaAutoSize from "react-textarea-autosize";
 import Input from "~/components/ui/Input";
-import Modal from "~/components/ui/Modal";
 import Button from "~/components/ui/Button";
 import { useNoteStore } from "~/store/noteStore";
 import NoteLabels from "./NoteLabels";
 import { Note } from "~/types";
+import { DialogClose } from "~/components/ui/Dialog";
 
-interface UpdateNoteProps extends Note {
-  visible: boolean;
-  toggle: () => void;
+interface UpdateNoteProps {
+  note: Note;
+  onOpenChange: () => void;
 }
 
-export default function UpdateNote(props: UpdateNoteProps) {
-  const [title, setTitle] = useState("");
-  const [note, setNote] = useState("");
-
+export default function UpdateNote({ note, onOpenChange }: UpdateNoteProps) {
+  const [name, setName] = useState("");
+  const [text, setText] = useState("");
   const updateNote = useNoteStore((state) => state.updateNote);
+  const disabled =
+    (name === note.noteName && text === note.noteText) ||
+    (name === "" && text === "");
 
   useEffect(() => {
-    setTitle(props.noteName!);
-    setNote(props.noteText!);
-  }, [props.noteName, props.noteText]);
+    setName(note.noteName!);
+    setText(note.noteText!);
+  }, [note.noteName, note.noteText]);
 
   function handleUpdate() {
-    props.toggle();
-    if (title !== props.noteName || note !== props.noteText) {
-      updateNote({
-        noteName: title,
-        noteText: note,
-        id: props.id,
-        labelIds: props.labelIds,
-      });
-    }
+    if (disabled) return;
+
+    updateNote({
+      noteName: name,
+      noteText: text,
+      id: note.id,
+      labelIds: note.labelIds,
+    });
+    onOpenChange();
   }
 
   return (
-    <Modal visible={props.visible} toggle={handleUpdate}>
+    <>
       <Input
-        onChange={(event) => setTitle(event.target.value)}
-        value={title}
+        onChange={(event) => setName(event.target.value)}
+        value={name}
         placeholder="Title"
+        data-test-id="update title"
       />
       <TextareaAutoSize
-        onChange={(event) => setNote(event.target.value)}
-        value={note}
+        onChange={(event) => setText(event.target.value)}
+        value={text}
         className="textarea max-h-96"
         placeholder="Take a note..."
+        data-test-id="update text"
       />
 
-      <div className="note-label-list flex items-center mt-2">
-        <NoteLabels labelId={props.labelIds} noteId={props.id} />
-        <Button
-          className="ml-auto"
-          size="small"
-          aria-label="close update note dialog"
-          onClick={handleUpdate}
-        >
-          Close
-        </Button>
+      <div className="flex items-center mt-2 justify-between">
+        <div className="note-label-list">
+          <NoteLabels labelId={note.labelIds} noteId={note.id} />
+        </div>
+        <div className="flex">
+          <DialogClose asChild>
+            <Button
+              className="mr-2"
+              size="small"
+              aria-label="close update note dialog"
+            >
+              Close
+            </Button>
+          </DialogClose>
+          <Button
+            size="small"
+            aria-label="update note"
+            onClick={handleUpdate}
+            disabled={disabled}
+          >
+            Update
+          </Button>
+        </div>
       </div>
-    </Modal>
+    </>
   );
 }
