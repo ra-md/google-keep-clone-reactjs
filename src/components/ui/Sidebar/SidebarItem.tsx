@@ -34,7 +34,7 @@ export default function SidebarItem(props: SidebarItemProps) {
   );
 }
 
-function ItemLink(props: SidebarItemProps & {visible: boolean}) {
+function ItemLink(props: SidebarItemProps & { visible: boolean }) {
   return (
     <Link
       className={clsx(
@@ -48,7 +48,7 @@ function ItemLink(props: SidebarItemProps & {visible: boolean}) {
   );
 }
 
-function ItemButton(props: SidebarItemProps & {visible: boolean}) {
+function ItemButton(props: SidebarItemProps & { visible: boolean }) {
   return (
     <button
       className={clsx(
