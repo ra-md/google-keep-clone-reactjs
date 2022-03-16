@@ -5,14 +5,15 @@ import Button from "~/components/ui/Button";
 import { useNoteStore } from "~/store/noteStore";
 import NoteLabels from "./NoteLabels";
 import { Note } from "~/types";
-import { DialogClose } from "~/components/ui/Dialog";
+import { DialogClose, Dialog, DialogContent, DialogTitle } from "~/components/ui/Dialog";
 
 interface UpdateNoteProps {
   note: Note;
   onOpenChange: () => void;
+  openUpdateNote: boolean;
 }
 
-export default function UpdateNote({ note, onOpenChange }: UpdateNoteProps) {
+export default function UpdateNote({ note, onOpenChange, openUpdateNote }: UpdateNoteProps) {
   const [name, setName] = useState("");
   const [text, setText] = useState("");
   const updateNote = useNoteStore((state) => state.updateNote);
@@ -23,7 +24,7 @@ export default function UpdateNote({ note, onOpenChange }: UpdateNoteProps) {
   useEffect(() => {
     setName(note.noteName!);
     setText(note.noteText!);
-  }, [note.noteName, note.noteText]);
+  }, [note.noteName, note.noteText, onOpenChange]);
 
   function handleUpdate() {
     if (disabled) return;
@@ -38,45 +39,48 @@ export default function UpdateNote({ note, onOpenChange }: UpdateNoteProps) {
   }
 
   return (
-    <>
-      <Input
-        onChange={(event) => setName(event.target.value)}
-        value={name}
-        placeholder="Title"
-        data-test-id="update title"
-      />
-      <TextareaAutoSize
-        onChange={(event) => setText(event.target.value)}
-        value={text}
-        className="textarea max-h-96"
-        placeholder="Take a note..."
-        data-test-id="update text"
-      />
+    <Dialog open={openUpdateNote} onOpenChange={onOpenChange}>
+      <DialogContent>
+        <DialogTitle>Update note</DialogTitle>
+        <Input
+          onChange={(event) => setName(event.target.value)}
+          value={name}
+          placeholder="Title"
+          data-test-id="update title"
+        />
+        <TextareaAutoSize
+          onChange={(event) => setText(event.target.value)}
+          value={text}
+          className="textarea max-h-96"
+          placeholder="Take a note..."
+          data-test-id="update text"
+        />
 
-      <div className="flex items-center mt-2 justify-between">
-        <div className="note-label-list">
-          <NoteLabels labelId={note.labelIds} noteId={note.id} />
-        </div>
-        <div className="flex">
-          <DialogClose asChild>
+        <div className="flex items-center mt-2 justify-between">
+          <div className="note-label-list">
+            <NoteLabels labelId={note.labelIds} noteId={note.id} />
+          </div>
+          <div className="flex">
+            <DialogClose asChild>
+              <Button
+                className="mr-2"
+                size="small"
+                aria-label="close update note dialog"
+              >
+                Close
+              </Button>
+            </DialogClose>
             <Button
-              className="mr-2"
               size="small"
-              aria-label="close update note dialog"
+              aria-label="update note"
+              onClick={handleUpdate}
+              disabled={disabled}
             >
-              Close
+              Update
             </Button>
-          </DialogClose>
-          <Button
-            size="small"
-            aria-label="update note"
-            onClick={handleUpdate}
-            disabled={disabled}
-          >
-            Update
-          </Button>
+          </div>
         </div>
-      </div>
-    </>
+      </DialogContent>
+    </Dialog>
   );
 }

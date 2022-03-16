@@ -6,7 +6,6 @@ import { Note } from "~/types";
 import clsx from "clsx";
 import { useNoteStore } from "~/store/noteStore";
 import SearchLabel from "../label/SearchLabel";
-import { Dialog, DialogContent, DialogTitle } from "~/components/ui/Dialog";
 
 interface NoteItemProps extends Note {}
 
@@ -75,18 +74,8 @@ export default function NoteItem({ note }: { note: NoteItemProps }) {
           </div>
         </div>
       </li>
-      <Dialog open={openUpdateNote} onOpenChange={updateNoteToggle}>
-        <DialogContent>
-          <DialogTitle>Update note</DialogTitle>
-          <UpdateNote note={note} onOpenChange={updateNoteToggle} />
-        </DialogContent>
-      </Dialog>
-      <Dialog open={openAddLabel} onOpenChange={addLabelToggle}>
-        <DialogContent>
-          <DialogTitle>Add label</DialogTitle>
-          <SearchLabel note={note} />
-        </DialogContent>
-      </Dialog>
+      <UpdateNote note={note} openUpdateNote={openUpdateNote} onOpenChange={updateNoteToggle} />
+      <SearchLabel note={note} openAddLabel={openAddLabel} onOpenChange={addLabelToggle} />
     </>
   );
 }
