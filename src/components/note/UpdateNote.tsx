@@ -3,7 +3,7 @@ import TextareaAutoSize from "react-textarea-autosize";
 import Input from "~/components/ui/Input";
 import Button from "~/components/ui/Button";
 import { useNoteStore } from "~/store/noteStore";
-import NoteLabels from "./NoteLabels";
+import NoteLabelsList from "./NoteLabelsList";
 import { Note } from "~/types";
 import { DialogClose, Dialog, DialogContent, DialogTitle } from "~/components/ui/Dialog";
 
@@ -58,7 +58,7 @@ export default function UpdateNote({ note, onOpenChange, openUpdateNote }: Updat
 
         <div className="flex items-center mt-2 justify-between">
           <div className="note-label-list">
-            <NoteLabels labelId={note.labelIds} noteId={note.id} />
+            <NoteLabelsList labelId={note.labelIds} noteId={note.id} />
           </div>
           <div className="flex">
             <DialogClose asChild>
