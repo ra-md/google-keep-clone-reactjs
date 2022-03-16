@@ -1,13 +1,12 @@
-import "@testing-library/jest-dom";
 import { render, screen, userEvent } from "~/utils/test-utils";
 import CreateNote from "../CreateNote";
 
 describe("CreateNote", () => {
   beforeEach(() => {
     render(<CreateNote />);
-  })
+  });
 
-  it("should show title input when text input clicked", () => {
+  it("should render title input when text input clicked", () => {
     expect(screen.queryByPlaceholderText("Title")).not.toBeInTheDocument();
 
     userEvent.click(screen.getByPlaceholderText("Take a note..."));
@@ -15,7 +14,7 @@ describe("CreateNote", () => {
     expect(screen.getByPlaceholderText("Title")).toBeInTheDocument();
   });
 
-  it("should show Close button when text input clicked", () => {
+  it("should render Close button when text input clicked", () => {
     expect(
       screen.queryByRole("button", {
         name: /Close/i,

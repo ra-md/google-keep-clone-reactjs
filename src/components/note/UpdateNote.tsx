@@ -5,7 +5,12 @@ import Button from "~/components/ui/Button";
 import { useNoteStore } from "~/store/noteStore";
 import NoteLabelsList from "./NoteLabelsList";
 import { Note } from "~/types";
-import { DialogClose, Dialog, DialogContent, DialogTitle } from "~/components/ui/Dialog";
+import {
+  DialogClose,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+} from "~/components/ui/Dialog";
 
 interface UpdateNoteProps {
   note: Note;
@@ -13,7 +18,11 @@ interface UpdateNoteProps {
   openUpdateNote: boolean;
 }
 
-export default function UpdateNote({ note, onOpenChange, openUpdateNote }: UpdateNoteProps) {
+export default function UpdateNote({
+  note,
+  onOpenChange,
+  openUpdateNote,
+}: UpdateNoteProps) {
   const [name, setName] = useState("");
   const [text, setText] = useState("");
   const updateNote = useNoteStore((state) => state.updateNote);

@@ -4,15 +4,24 @@ import { Label, Note } from "~/types";
 import { useLabelStore } from "~/store/labelStore";
 import SearchLabelList from "./SearchLabelList";
 import SearchLabelInput from "./SearchLabelInput";
-import { DialogClose, Dialog, DialogContent, DialogTitle } from "~/components/ui/Dialog";
+import {
+  DialogClose,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+} from "~/components/ui/Dialog";
 
 interface SearchLabelProps {
   note: Note;
   onOpenChange: () => void;
-  openAddLabel: boolean
+  openAddLabel: boolean;
 }
 
-export default function SearchLabel({ note, openAddLabel, onOpenChange }: SearchLabelProps) {
+export default function SearchLabel({
+  note,
+  openAddLabel,
+  onOpenChange,
+}: SearchLabelProps) {
   const allLabels = useLabelStore((state) => state.labels);
   const [searchResults, setSearchResults] = useState<Label[]>([]);
   const labels = searchResults.length > 0 ? searchResults : allLabels;

@@ -74,8 +74,16 @@ export default function NoteItem({ note }: { note: NoteItemProps }) {
           </div>
         </div>
       </li>
-      <UpdateNote note={note} openUpdateNote={openUpdateNote} onOpenChange={updateNoteToggle} />
-      <SearchLabel note={note} openAddLabel={openAddLabel} onOpenChange={addLabelToggle} />
+      <UpdateNote
+        note={note}
+        openUpdateNote={openUpdateNote}
+        onOpenChange={updateNoteToggle}
+      />
+      <SearchLabel
+        note={note}
+        openAddLabel={openAddLabel}
+        onOpenChange={addLabelToggle}
+      />
     </>
   );
 }

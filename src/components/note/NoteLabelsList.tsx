@@ -1,5 +1,5 @@
 import { useLabelStore } from "~/store/labelStore";
-import NoteLabelsItem from './NoteLabelsItem'
+import NoteLabelsItem from "./NoteLabelsItem";
 
 interface NoteLabelsProps {
   labelId: string[];

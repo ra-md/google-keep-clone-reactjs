@@ -1,4 +1,3 @@
-import "@testing-library/jest-dom";
 import { render, screen, userEvent } from "~/utils/test-utils";
 import EditLabelItem from "../EditLabelItem";
 
@@ -10,7 +9,7 @@ const label = {
 describe("EditLabelItem", () => {
   beforeEach(() => {
     render(<EditLabelItem label={label} />);
-  })
+  });
 
   it("should render label name", () => {
     expect(screen.getByText(label.labelName)).toBeInTheDocument();
