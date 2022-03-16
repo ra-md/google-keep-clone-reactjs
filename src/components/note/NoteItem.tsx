@@ -7,9 +7,11 @@ import clsx from "clsx";
 import { useNoteStore } from "~/store/noteStore";
 import SearchLabel from "../label/SearchLabel";
 
-interface NoteItemProps extends Note {}
+interface NoteItemProps {
+  note: Note
+}
 
-export default function NoteItem({ note }: { note: NoteItemProps }) {
+export default function NoteItem({ note }: NoteItemProps) {
   const [openUpdateNote, setOpenUpdateNote] = useState(false);
   const [openAddLabel, setOpenAddLabel] = useState(false);
   const deleteNote = useNoteStore((state) => state.deleteNote);
