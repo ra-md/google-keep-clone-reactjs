@@ -39,7 +39,7 @@ function ItemLink(props: SidebarItemProps & { visible: boolean }) {
     <Link
       className={clsx(
         "w-full duration-200 ease-in-out",
-        props.visible ? "pl-[31px]" : "ml-[12px]"
+        props.visible ? "pl-[31px]" : "pl-[12px]"
       )}
       to={props.route!}
     >
@@ -53,7 +53,7 @@ function ItemButton(props: SidebarItemProps & { visible: boolean }) {
     <button
       className={clsx(
         "w-full duration-200 ease-in-out",
-        props.visible ? "pl-[31px]" : "ml-[12px]"
+        props.visible ? "pl-[31px]" : "pl-[12px]"
       )}
       aria-label={props.name}
     >
