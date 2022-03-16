@@ -8,15 +8,15 @@ const label = {
 };
 
 describe("EditLabelItem", () => {
-  it("should render label name", () => {
+  beforeEach(() => {
     render(<EditLabelItem label={label} />);
+  })
 
+  it("should render label name", () => {
     expect(screen.getByText(label.labelName)).toBeInTheDocument();
   });
 
   it("should render input field if rename button clicked", () => {
-    render(<EditLabelItem label={label} />);
-
     userEvent.click(
       screen.getByRole("button", {
         name: /Rename label/i,
@@ -27,8 +27,6 @@ describe("EditLabelItem", () => {
   });
 
   it("should not close the input field if the value is empty", () => {
-    render(<EditLabelItem label={label} />);
-
     userEvent.click(
       screen.getByRole("button", {
         name: /Rename label/i,

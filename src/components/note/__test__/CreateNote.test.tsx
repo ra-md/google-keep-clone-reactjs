@@ -3,9 +3,11 @@ import { render, screen, userEvent } from "~/utils/test-utils";
 import CreateNote from "../CreateNote";
 
 describe("CreateNote", () => {
-  it("should show title input when text input clicked", () => {
+  beforeEach(() => {
     render(<CreateNote />);
+  })
 
+  it("should show title input when text input clicked", () => {
     expect(screen.queryByPlaceholderText("Title")).not.toBeInTheDocument();
 
     userEvent.click(screen.getByPlaceholderText("Take a note..."));
@@ -14,8 +16,6 @@ describe("CreateNote", () => {
   });
 
   it("should show Close button when text input clicked", () => {
-    render(<CreateNote />);
-
     expect(
       screen.queryByRole("button", {
         name: /Close/i,
