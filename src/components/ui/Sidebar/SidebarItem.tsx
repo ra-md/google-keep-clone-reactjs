@@ -9,7 +9,6 @@ interface SidebarItemProps {
   icon: ReactNode;
   onClick?: () => void;
   route?: string;
-  visible?: boolean
 }
 
 export default function SidebarItem(props: SidebarItemProps) {
@@ -35,7 +34,7 @@ export default function SidebarItem(props: SidebarItemProps) {
   );
 }
 
-function ItemLink(props: SidebarItemProps) {
+function ItemLink(props: SidebarItemProps & {visible: boolean}) {
   return (
     <Link
       className={clsx(
@@ -49,7 +48,7 @@ function ItemLink(props: SidebarItemProps) {
   );
 }
 
-function ItemButton(props: SidebarItemProps) {
+function ItemButton(props: SidebarItemProps & {visible: boolean}) {
   return (
     <button
       className={clsx(
