@@ -9,6 +9,7 @@ import clsx from "clsx";
 const Home = lazy(() => import("./components/page/Home"));
 const Search = lazy(() => import("./components/page/Search"));
 const NotesLabel = lazy(() => import("./components/page/NotesLabel"));
+import Redux from "./Redux";
 
 export default function App() {
   const [visible] = useAtom(sidebarAtom);
@@ -41,7 +42,7 @@ export default function App() {
               </Suspense>
             </Route>
             <Route path="*">
-              <h1>404</h1>
+              <Redux />
             </Route>
           </Switch>
         </main>

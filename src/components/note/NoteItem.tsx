@@ -8,7 +8,7 @@ import { useNoteStore } from "~/store/noteStore";
 import SearchLabel from "../label/SearchLabel";
 
 interface NoteItemProps {
-  note: Note
+  note: Note;
 }
 
 export default function NoteItem({ note }: NoteItemProps) {
@@ -56,7 +56,7 @@ export default function NoteItem({ note }: NoteItemProps) {
             data-testid="note-item-btn-wrapper"
           >
             <Button
-              style={{opacity: hover ? 1 : 0}}
+              style={{ opacity: hover ? 1 : 0 }}
               icon
               aria-label="Add label"
               dataTip="Add label"
@@ -68,7 +68,7 @@ export default function NoteItem({ note }: NoteItemProps) {
               <Tag size={17} />
             </Button>
             <Button
-              style={{opacity: hover ? 1 : 0}}
+              style={{ opacity: hover ? 1 : 0 }}
               icon
               aria-label="Delete note"
               dataTip="Delete note"
