@@ -14,6 +14,7 @@ interface NoteItemProps {
 export default function NoteItem({ note }: NoteItemProps) {
   const [openUpdateNote, setOpenUpdateNote] = useState(false);
   const [openAddLabel, setOpenAddLabel] = useState(false);
+  const [hover, setHover] = useState(false);
   const deleteNote = useNoteStore((state) => state.deleteNote);
 
   const slicedText =
@@ -49,9 +50,13 @@ export default function NoteItem({ note }: NoteItemProps) {
             <p>{slicedText}</p>
           </div>
           <div
-            className={`flex justify-end absolute inset-0 items-end opacity-0 hover:opacity-100 focus:opacity-100 duration-200 ease-in-out mb-0.5 mr-0.5`}
+            className={`flex justify-end absolute inset-0 items-end focus:opacity-100 duration-200 ease-in-out mb-0.5 mr-0.5`}
+            onMouseEnter={() => setHover(true)}
+            onMouseLeave={() => setHover(false)}
+            data-testid="note-item-btn-wrapper"
           >
             <Button
+              style={{opacity: hover ? 1 : 0}}
               icon
               aria-label="Add label"
               dataTip="Add label"
@@ -63,6 +68,7 @@ export default function NoteItem({ note }: NoteItemProps) {
               <Tag size={17} />
             </Button>
             <Button
+              style={{opacity: hover ? 1 : 0}}
               icon
               aria-label="Delete note"
               dataTip="Delete note"

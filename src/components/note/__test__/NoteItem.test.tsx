@@ -1,4 +1,4 @@
-import { render, screen } from "~/utils/test-utils";
+import { render, screen, userEvent } from "~/utils/test-utils";
 import NoteItem from "../NoteItem";
 
 const note = {
@@ -35,5 +35,12 @@ describe('NoteItem', () => {
 		expect(screen.getByText(sliced)).toBeInTheDocument()
 	})
 
-	// render delete and add label button
+	it("should display delete note and add label button when note hovered", () => {
+		render(<NoteItem note={note} />)
+
+	   userEvent.hover(screen.getByTestId("note-item-btn-wrapper"));
+
+	   expect(screen.getByRole('button', {name: /delete note/i})).toBeVisible()
+	   expect(screen.getByRole('button', {name: /add label/i})).toBeVisible()
+	})
 })
