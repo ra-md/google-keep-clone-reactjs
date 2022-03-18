@@ -1,42 +1,28 @@
 import { RootState } from "./store/store";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  createNote,
-  deleteNote,
-  updateNote,
-  addLabel,
-  removeLabel,
-} from "./store/noteSlice";
+import { createLabel, updateLabel, deleteLabel } from "./store/labelSlice";
 import Button from "./components/ui/Button";
 
 export default function Redux() {
   const dispatch = useDispatch();
-  const notes = useSelector((state: RootState) => state.note.notes);
+  const labels = useSelector((state: RootState) => state.label.labels);
 
-  const note = {
-    id: "3",
-    noteName: `note update name`,
-    noteText: `note update text`,
-    labelIds: [],
+  const label = {
+    id: "1",
+    labelName: `label 3 update`,
   };
 
   return (
     <div>
-      <Button
-        onClick={() => dispatch(removeLabel({ labelId: "11", noteId: "3" }))}
-      >
-        dispatch
-      </Button>
-      {notes.length > 0 ? (
+      <Button onClick={() => dispatch(deleteLabel("1"))}>dispatch</Button>
+      {labels.length > 0 ? (
         <>
-          {notes.map((note) => {
+          {labels.map((label) => {
             return (
-              <div key={note.id}>
+              <div key={label.id}>
                 <h1>
-                  {note.noteName}, id: {note.id}
+                  {label.labelName}, id: {label.id}
                 </h1>
-                {note.labelIds.length > 0 &&
-                  note.labelIds.map((label) => <p key={label}>{label}</p>)}
               </div>
             );
           })}

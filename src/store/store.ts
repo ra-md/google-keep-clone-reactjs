@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import noteSlice from "./noteSlice";
+import labelSlice from "./labelSlice";
 import { combineReducers } from "redux";
 import {
   persistReducer,
@@ -20,6 +21,7 @@ const persistConfig = {
 
 const reducers = combineReducers({
   note: noteSlice,
+  label: labelSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducers);
@@ -35,5 +37,4 @@ export const store = configureStore({
 });
 
 export type RootState = ReturnType<typeof store.getState>;
-// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = typeof store.dispatch;

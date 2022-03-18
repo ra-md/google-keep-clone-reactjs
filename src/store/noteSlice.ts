@@ -65,7 +65,6 @@ export const noteSlice = createSlice({
   },
 });
 
-// Action creators are generated for each case reducer function
 export const { createNote, updateNote, deleteNote, addLabel, removeLabel } =
   noteSlice.actions;
 
