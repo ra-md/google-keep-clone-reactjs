@@ -54,16 +54,7 @@ export const useNoteStore = create<StoreState>(
           );
           set({ notes: [...notes] });
         }
-      },
-      searchNote(query) {
-        const { notes } = get();
-        return Array.from(
-          new Set([
-            ...notes.filter(({ noteName }) => noteName?.includes(query)),
-            ...notes.filter(({ noteText }) => noteText?.includes(query)),
-          ])
-        );
-      },
+      }
     }),
     { name: "note" }
   )

@@ -10,7 +10,6 @@
     "test:e2e": "playwright test"
   },
   "dependencies": {
-    "@headlessui/react": "^1.4.0",
     "@radix-ui/react-dialog": "^0.1.7",
     "@radix-ui/react-tooltip": "^0.1.7",
     "clsx": "^1.1.1",
