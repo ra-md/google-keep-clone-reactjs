@@ -3,7 +3,7 @@ import Input from "~/components/ui/Input";
 import { Search } from "react-feather";
 import { useState, useEffect } from "react";
 import { Label } from "~/types";
-import { useSelector } from 'react-redux'
+import { useSelector } from "react-redux";
 
 interface SearchLabelInputProps {
   setSearchResults: (result: Label[]) => void;
@@ -13,10 +13,12 @@ export default function SearchLabelInput({
   setSearchResults,
 }: SearchLabelInputProps) {
   const [searchValue, setSearchValue] = useState("");
-  const labels = useSelector(state => state.label.labels)
+  const labels = useSelector((state) => state.label.labels);
 
   function handleSearch() {
-    setSearchResults(labels.filter(({ labelName }) => labelName.includes(searchValue)));
+    setSearchResults(
+      labels.filter(({ labelName }) => labelName.includes(searchValue))
+    );
   }
 
   useEffect(() => {

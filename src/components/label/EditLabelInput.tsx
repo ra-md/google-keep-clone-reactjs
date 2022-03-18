@@ -5,15 +5,15 @@ import Button from "~/components/ui/Button";
 import { v4 as uuidv4 } from "uuid";
 import { iconSize } from "~/utils/constants";
 import clsx from "clsx";
-import { useDispatch, useSelector } from 'react-redux'
-import { createLabel } from '~/store/labelSlice'
+import { useDispatch, useSelector } from "react-redux";
+import { createLabel } from "~/store/labelSlice";
 
 export default function EditLabelInput() {
   const [labelName, setLabelName] = useState("");
   const [blur, setBlur] = useState(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const dispatch = useDispatch()
-  const labels = useSelector(state => state.label.labels)
+  const dispatch = useDispatch();
+  const labels = useSelector((state) => state.label.labels);
 
   useEffect(() => {
     if (inputRef.current) {
@@ -32,7 +32,7 @@ export default function EditLabelInput() {
           id: uuidv4(),
           labelName: labelName,
         })
-      )
+      );
       setLabelName("");
       setBlur(false);
     }

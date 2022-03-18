@@ -5,8 +5,8 @@ import UpdateNote from "./UpdateNote";
 import { Note } from "~/types";
 import clsx from "clsx";
 import SearchLabel from "../label/SearchLabel";
-import { useDispatch } from 'react-redux'
-import { deleteNote } from '~/store/noteSlice'
+import { useDispatch } from "react-redux";
+import { deleteNote } from "~/store/noteSlice";
 
 interface NoteItemProps {
   note: Note;
@@ -16,7 +16,7 @@ export default function NoteItem({ note }: NoteItemProps) {
   const [openUpdateNote, setOpenUpdateNote] = useState(false);
   const [openAddLabel, setOpenAddLabel] = useState(false);
   const [hover, setHover] = useState(false);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const slicedText =
     note.noteText && note.noteText.length > 300

@@ -10,8 +10,8 @@ import {
   DialogContent,
   DialogTitle,
 } from "~/components/ui/Dialog";
-import { useDispatch } from 'react-redux'
-import { updateNote } from '~/store/noteSlice'
+import { useDispatch } from "react-redux";
+import { updateNote } from "~/store/noteSlice";
 
 interface UpdateNoteProps {
   note: Note;
@@ -26,7 +26,7 @@ export default function UpdateNote({
 }: UpdateNoteProps) {
   const [name, setName] = useState("");
   const [text, setText] = useState("");
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const disabled =
     (name === note.noteName && text === note.noteText) ||
     (name === "" && text === "");
@@ -46,7 +46,7 @@ export default function UpdateNote({
         id: note.id,
         labelIds: note.labelIds,
       })
-    )
+    );
 
     onOpenChange();
   }

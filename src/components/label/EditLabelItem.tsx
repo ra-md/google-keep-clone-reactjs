@@ -5,15 +5,15 @@ import { Check, Edit2, Tag, Trash2 } from "react-feather";
 import Input from "~/components/ui/Input";
 import { iconSize } from "~/utils/constants";
 import clsx from "clsx";
-import { useDispatch, useSelector } from 'react-redux'
-import { deleteLabel, updateLabel } from '~/store/labelSlice'
+import { useDispatch, useSelector } from "react-redux";
+import { deleteLabel, updateLabel } from "~/store/labelSlice";
 
 export default function EditLabelItem({ label }: { label: Label }) {
   const [openDeleteBtn, setopenDeleteBtn] = useState(false);
   const [openUpdateInput, setOpenUpdateInput] = useState(false);
   const [labelName, setLabelName] = useState("");
-  const dispatch = useDispatch()
-  const labels = useSelector(state => state.label.labels)
+  const dispatch = useDispatch();
+  const labels = useSelector((state) => state.label.labels);
 
   function handleUpdateLabel() {
     if (labelName === "" || labelName.length > 40) return;

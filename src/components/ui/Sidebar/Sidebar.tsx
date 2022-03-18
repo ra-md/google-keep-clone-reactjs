@@ -7,12 +7,12 @@ import SidebarItem from "./SidebarItem";
 import EditLabel from "../../label/EditLabel";
 import clsx from "clsx";
 import { useVirtual } from "react-virtual";
-import { useSelector } from 'react-redux'
+import { useSelector } from "react-redux";
 
 export default function Sidebar() {
   const [openSidebar] = useAtom(sidebarAtom);
   const [openEditLabel, setOpenEditLabel] = useState(false);
-  const labels = useSelector(state => state.label.labels)
+  const labels = useSelector((state) => state.label.labels);
   const customMenu = [
     {
       icon: <Book />,

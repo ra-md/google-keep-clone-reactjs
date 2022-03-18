@@ -1,19 +1,21 @@
 import { render } from "@testing-library/react";
-import { configureStore } from '@reduxjs/toolkit'
-import { Provider } from 'react-redux'
-import { combineReducers } from 'redux'
-import { store } from '~/store/store'
-import noteSlice from '~/store/noteSlice'
-import labelSlice from '~/store/labelSlice'
+import { configureStore } from "@reduxjs/toolkit";
+import { Provider } from "react-redux";
+import { combineReducers } from "redux";
+import { store } from "~/store/store";
+import noteSlice from "~/store/noteSlice";
+import labelSlice from "~/store/labelSlice";
 
 function Wrapper({ children }) {
-    return <Provider store={store}>{children}</Provider>
-  }
+  return <Provider store={store}>{children}</Provider>;
+}
 
 const customRender = (ui: React.ReactElement, options = {}) =>
   render(ui, {
     wrapper: Wrapper,
-    store: configureStore({ reducer: combineReducers({ note: noteSlice, label: labelSlice }) }),
+    store: configureStore({
+      reducer: combineReducers({ note: noteSlice, label: labelSlice }),
+    }),
     ...options,
   });
 

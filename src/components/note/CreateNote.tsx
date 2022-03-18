@@ -3,15 +3,15 @@ import TextareaAutoSize from "react-textarea-autosize";
 import Button from "~/components/ui/Button";
 import Input from "~/components/ui/Input";
 import { v4 as uuidv4 } from "uuid";
-import { useDispatch } from 'react-redux'
-import { createNote } from '~/store/noteSlice'
+import { useDispatch } from "react-redux";
+import { createNote } from "~/store/noteSlice";
 
 export default function CreateNote() {
   const [visible, setVisible] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [title, setTitle] = useState("");
   const [note, setNote] = useState("");
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const submit = useCallback(async () => {
     if (title || note) {
@@ -22,7 +22,7 @@ export default function CreateNote() {
           noteText: note,
           labelIds: [],
         })
-      )
+      );
 
       setTitle("");
       setNote("");

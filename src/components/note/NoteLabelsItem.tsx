@@ -1,14 +1,14 @@
 import { X } from "react-feather";
 import { Label } from "~/types";
 import { useState } from "react";
-import { useDispatch } from 'react-redux'
-import { removeLabel } from '~/store/noteSlice'
+import { useDispatch } from "react-redux";
+import { removeLabel } from "~/store/noteSlice";
 
 export default function NoteLabelsItem(props: {
   label: Label;
   noteId: string;
 }) {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [visible, setVisible] = useState(false);
 
   return (
@@ -29,7 +29,9 @@ export default function NoteLabelsItem(props: {
             aria-label="Remove label"
             onClick={(event) => {
               event.stopPropagation();
-              dispatch(removeLabel({labelId: props.label.id, noteId: props.noteId}));
+              dispatch(
+                removeLabel({ labelId: props.label.id, noteId: props.noteId })
+              );
             }}
           >
             <X size={14} />
