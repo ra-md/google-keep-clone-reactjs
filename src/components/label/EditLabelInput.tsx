@@ -7,13 +7,14 @@ import { iconSize } from "~/utils/constants";
 import clsx from "clsx";
 import { useDispatch, useSelector } from "react-redux";
 import { createLabel } from "~/store/labelSlice";
+import { RootState } from "~/store/store";
 
 export default function EditLabelInput() {
   const [labelName, setLabelName] = useState("");
   const [blur, setBlur] = useState(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const dispatch = useDispatch();
-  const labels = useSelector((state) => state.label.labels);
+  const labels = useSelector((state: RootState) => state.label.labels);
 
   useEffect(() => {
     if (inputRef.current) {

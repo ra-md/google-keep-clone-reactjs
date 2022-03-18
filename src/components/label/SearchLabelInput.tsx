@@ -4,6 +4,7 @@ import { Search } from "react-feather";
 import { useState, useEffect } from "react";
 import { Label } from "~/types";
 import { useSelector } from "react-redux";
+import { RootState } from "~/store/store";
 
 interface SearchLabelInputProps {
   setSearchResults: (result: Label[]) => void;
@@ -13,7 +14,7 @@ export default function SearchLabelInput({
   setSearchResults,
 }: SearchLabelInputProps) {
   const [searchValue, setSearchValue] = useState("");
-  const labels = useSelector((state) => state.label.labels);
+  const labels = useSelector((state: RootState) => state.label.labels);
 
   function handleSearch() {
     setSearchResults(

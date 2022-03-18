@@ -6,16 +6,13 @@ import { store } from "~/store/store";
 import noteSlice from "~/store/noteSlice";
 import labelSlice from "~/store/labelSlice";
 
-function Wrapper({ children }) {
+function Wrapper({ children }: { children: React.ReactElement }) {
   return <Provider store={store}>{children}</Provider>;
 }
 
 const customRender = (ui: React.ReactElement, options = {}) =>
   render(ui, {
     wrapper: Wrapper,
-    store: configureStore({
-      reducer: combineReducers({ note: noteSlice, label: labelSlice }),
-    }),
     ...options,
   });
 

@@ -7,13 +7,14 @@ import { iconSize } from "~/utils/constants";
 import clsx from "clsx";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteLabel, updateLabel } from "~/store/labelSlice";
+import { RootState } from "~/store/store";
 
 export default function EditLabelItem({ label }: { label: Label }) {
   const [openDeleteBtn, setopenDeleteBtn] = useState(false);
   const [openUpdateInput, setOpenUpdateInput] = useState(false);
   const [labelName, setLabelName] = useState("");
   const dispatch = useDispatch();
-  const labels = useSelector((state) => state.label.labels);
+  const labels = useSelector((state: RootState) => state.label.labels);
 
   function handleUpdateLabel() {
     if (labelName === "" || labelName.length > 40) return;

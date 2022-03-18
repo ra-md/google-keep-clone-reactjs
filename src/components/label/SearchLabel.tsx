@@ -10,6 +10,7 @@ import {
   DialogTitle,
 } from "~/components/ui/Dialog";
 import { useSelector } from "react-redux";
+import { RootState } from "~/store/store";
 
 interface SearchLabelProps {
   note: Note;
@@ -22,7 +23,7 @@ export default function SearchLabel({
   openAddLabel,
   onOpenChange,
 }: SearchLabelProps) {
-  const allLabels = useSelector((state) => state.label.labels);
+  const allLabels = useSelector((state: RootState) => state.label.labels);
   const [searchResults, setSearchResults] = useState<Label[]>([]);
   const labels = searchResults.length > 0 ? searchResults : allLabels;
 

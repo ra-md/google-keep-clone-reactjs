@@ -1,10 +1,11 @@
 import NoteList from "../note/NoteList";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { RootState } from "~/store/store";
 
 export default function Search() {
   const { query } = useParams<{ query: string }>();
-  const notes = useSelector((state) => state.note.notes);
+  const notes = useSelector((state: RootState) => state.note.notes);
 
   const filterNotes = Array.from(
     new Set([
