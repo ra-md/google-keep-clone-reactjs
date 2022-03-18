@@ -9,7 +9,6 @@ interface StoreState {
   deleteNote: (id: string) => void;
   addLabel: (labelId: string, noteId: string) => void;
   removeLabel: (labelId: string, noteId: string) => void;
-  searchNote: (query: string) => Note[];
 }
 
 export const useNoteStore = create<StoreState>(
