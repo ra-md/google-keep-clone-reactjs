@@ -1,9 +1,9 @@
 import CreateNote from "../note/CreateNote";
 import NoteList from "../note/NoteList";
-import { useNoteStore } from "~/store/noteStore";
+import { useSelector } from 'react-redux'
 
 export default function Home() {
-  const notes = useNoteStore((state) => state.notes);
+  const notes = useSelector(state => state.note.notes)
 
   return (
     <>

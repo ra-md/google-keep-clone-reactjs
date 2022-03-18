@@ -1,21 +1,19 @@
 import { Label } from "~/types";
 import { useState, useEffect } from "react";
-import { useLabelStore } from "~/store/labelStore";
 import Button from "~/components/ui/Button";
 import { Check, Edit2, Tag, Trash2 } from "react-feather";
 import Input from "~/components/ui/Input";
 import { iconSize } from "~/utils/constants";
 import clsx from "clsx";
+import { useDispatch, useSelector } from 'react-redux'
+import { deleteLabel, updateLabel } from '~/store/labelSlice'
 
 export default function EditLabelItem({ label }: { label: Label }) {
   const [openDeleteBtn, setopenDeleteBtn] = useState(false);
   const [openUpdateInput, setOpenUpdateInput] = useState(false);
   const [labelName, setLabelName] = useState("");
-  const { deleteLabel, updateLabel, labels } = useLabelStore((state) => ({
-    labels: state.labels,
-    deleteLabel: state.deleteLabel,
-    updateLabel: state.updateLabel,
-  }));
+  const dispatch = useDispatch()
+  const labels = useSelector(state => state.label.labels)
 
   function handleUpdateLabel() {
     if (labelName === "" || labelName.length > 40) return;
@@ -23,13 +21,13 @@ export default function EditLabelItem({ label }: { label: Label }) {
     const findLabel = labels.find((label) => label.labelName === labelName);
 
     if (labelName === label.labelName || findLabel === undefined) {
-      updateLabel({ id: label.id, labelName });
+      dispatch(updateLabel({ id: label.id, labelName }));
       setOpenUpdateInput(false);
     }
   }
 
   function handleDeleteLabel() {
-    deleteLabel(label.id);
+    dispatch(deleteLabel(label.id));
   }
 
   useEffect(() => {

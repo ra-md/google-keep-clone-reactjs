@@ -1,13 +1,12 @@
 import { useParams } from "react-router-dom";
 import NoteList from "../note/NoteList";
 import { Tag } from "react-feather";
-import { useNoteStore } from "~/store/noteStore";
-import { useLabelStore } from "~/store/labelStore";
+import { useSelector } from 'react-redux'
 
 export default function NotesLabel() {
   const { labelName } = useParams<{ labelName: string }>();
-  const notes = useNoteStore((state) => state.notes);
-  const labels = useLabelStore((state) => state.labels);
+  const notes = useSelector(state => state.note.notes)
+  const labels = useSelector(state => state.label.labels)
 
   const findLabel = labels.find((label) => label.labelName === labelName);
   const filteredNotes = notes.filter((note) => {

@@ -1,10 +1,10 @@
-import { useLabelStore } from "~/store/labelStore";
 import EditLabelItem from "./EditLabelItem";
 import { useVirtual } from "react-virtual";
 import { useRef } from "react";
+import { useSelector } from 'react-redux'
 
 export default function EditLabelList() {
-  const labels = useLabelStore((state) => state.labels);
+  const labels = useSelector(state => state.label.labels)
   const parentRef = useRef<HTMLDivElement>(null);
 
   const rowVirtualizer = useVirtual({

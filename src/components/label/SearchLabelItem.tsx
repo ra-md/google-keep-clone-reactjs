@@ -1,6 +1,7 @@
 import { Label, Note } from "~/types";
 import { useState, useEffect, ChangeEvent } from "react";
-import { useNoteStore } from "~/store/noteStore";
+import { addLabel, removeLabel } from '~/store/noteSlice'
+import { useDispatch } from 'react-redux'
 
 interface SearchLabelItemProps {
   label: Label;
@@ -9,7 +10,7 @@ interface SearchLabelItemProps {
 
 export default function SearchLabelItem({ label, note }: SearchLabelItemProps) {
   const [isChecked, setIsChecked] = useState(false);
-  const { addLabel, removeLabel } = useNoteStore();
+  const dispatch = useDispatch()
 
   useEffect(() => {
     if (note?.labelIds?.indexOf(label.id) !== -1) {
@@ -20,9 +21,9 @@ export default function SearchLabelItem({ label, note }: SearchLabelItemProps) {
   function submit(event: ChangeEvent<HTMLInputElement>) {
     setIsChecked(!isChecked);
     if (event.target.checked) {
-      addLabel(label.id, note.id);
+      dispatch(addLabel({labelId: label.id, noteId: note.id}));
     } else {
-      removeLabel(label.id, note.id);
+      dispatch(removeLabel({labelId: label.id, noteId: note.id}));
     }
   }
 

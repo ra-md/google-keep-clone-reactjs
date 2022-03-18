@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import TextareaAutoSize from "react-textarea-autosize";
 import Input from "~/components/ui/Input";
 import Button from "~/components/ui/Button";
-import { useNoteStore } from "~/store/noteStore";
 import NoteLabelsList from "./NoteLabelsList";
 import { Note } from "~/types";
 import {
@@ -11,6 +10,8 @@ import {
   DialogContent,
   DialogTitle,
 } from "~/components/ui/Dialog";
+import { useDispatch } from 'react-redux'
+import { updateNote } from '~/store/noteSlice'
 
 interface UpdateNoteProps {
   note: Note;
@@ -25,7 +26,7 @@ export default function UpdateNote({
 }: UpdateNoteProps) {
   const [name, setName] = useState("");
   const [text, setText] = useState("");
-  const updateNote = useNoteStore((state) => state.updateNote);
+  const dispatch = useDispatch()
   const disabled =
     (name === note.noteName && text === note.noteText) ||
     (name === "" && text === "");
@@ -38,12 +39,15 @@ export default function UpdateNote({
   function handleUpdate() {
     if (disabled) return;
 
-    updateNote({
-      noteName: name,
-      noteText: text,
-      id: note.id,
-      labelIds: note.labelIds,
-    });
+    dispatch(
+      updateNote({
+        noteName: name,
+        noteText: text,
+        id: note.id,
+        labelIds: note.labelIds,
+      })
+    )
+
     onOpenChange();
   }
 

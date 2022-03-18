@@ -3,18 +3,17 @@ import { Check, X } from "react-feather";
 import Input from "~/components/ui/Input";
 import Button from "~/components/ui/Button";
 import { v4 as uuidv4 } from "uuid";
-import { useLabelStore } from "~/store/labelStore";
 import { iconSize } from "~/utils/constants";
 import clsx from "clsx";
+import { useDispatch, useSelector } from 'react-redux'
+import { createLabel } from '~/store/labelSlice'
 
 export default function EditLabelInput() {
   const [labelName, setLabelName] = useState("");
   const [blur, setBlur] = useState(false);
-  const { createLabel, labels } = useLabelStore(({ labels, createLabel }) => ({
-    labels,
-    createLabel,
-  }));
   const inputRef = useRef<HTMLInputElement | null>(null);
+  const dispatch = useDispatch()
+  const labels = useSelector(state => state.label.labels)
 
   useEffect(() => {
     if (inputRef.current) {
@@ -28,10 +27,12 @@ export default function EditLabelInput() {
       (label) => label.labelName === labelName
     );
     if (findLabel === -1) {
-      createLabel({
-        id: uuidv4(),
-        labelName: labelName,
-      });
+      dispatch(
+        createLabel({
+          id: uuidv4(),
+          labelName: labelName,
+        })
+      )
       setLabelName("");
       setBlur(false);
     }

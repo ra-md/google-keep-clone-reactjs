@@ -14,9 +14,8 @@ import {
 import storage from "redux-persist/lib/storage";
 
 const persistConfig = {
-  key: "test",
+  key: "google-keep-clone",
   storage,
-  version: 1,
 };
 
 const reducers = combineReducers({

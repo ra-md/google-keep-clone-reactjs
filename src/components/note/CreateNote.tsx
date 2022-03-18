@@ -2,24 +2,27 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import TextareaAutoSize from "react-textarea-autosize";
 import Button from "~/components/ui/Button";
 import Input from "~/components/ui/Input";
-import { useNoteStore } from "~/store/noteStore";
 import { v4 as uuidv4 } from "uuid";
+import { useDispatch } from 'react-redux'
+import { createNote } from '~/store/noteSlice'
 
 export default function CreateNote() {
   const [visible, setVisible] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [title, setTitle] = useState("");
   const [note, setNote] = useState("");
-  const createNote = useNoteStore((state) => state.createNote);
+  const dispatch = useDispatch()
 
   const submit = useCallback(async () => {
     if (title || note) {
-      createNote({
-        id: uuidv4(),
-        noteName: title,
-        noteText: note,
-        labelIds: [],
-      });
+      dispatch(
+        createNote({
+          id: uuidv4(),
+          noteName: title,
+          noteText: note,
+          labelIds: [],
+        })
+      )
 
       setTitle("");
       setNote("");

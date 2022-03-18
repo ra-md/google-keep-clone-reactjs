@@ -1,5 +1,6 @@
 import { useLabelStore } from "~/store/labelStore";
 import NoteLabelsItem from "./NoteLabelsItem";
+import { useSelector } from 'react-redux'
 
 interface NoteLabelsProps {
   labelId: string[];
@@ -7,7 +8,8 @@ interface NoteLabelsProps {
 }
 
 export default function NoteLabels({ labelId, noteId }: NoteLabelsProps) {
-  const labels = useLabelStore((state) => state.labels);
+  // const labels = useLabelStore((state) => state.labels);
+  const labels = useSelector(state => state.label.labels)
   const filteredLabels = labels.filter((label) => labelId.includes(label.id));
 
   if (filteredLabels.length === 0) return null;

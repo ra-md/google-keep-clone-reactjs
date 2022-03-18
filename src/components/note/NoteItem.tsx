@@ -4,8 +4,9 @@ import Button from "~/components/ui/Button";
 import UpdateNote from "./UpdateNote";
 import { Note } from "~/types";
 import clsx from "clsx";
-import { useNoteStore } from "~/store/noteStore";
 import SearchLabel from "../label/SearchLabel";
+import { useDispatch } from 'react-redux'
+import { deleteNote } from '~/store/noteSlice'
 
 interface NoteItemProps {
   note: Note;
@@ -15,7 +16,7 @@ export default function NoteItem({ note }: NoteItemProps) {
   const [openUpdateNote, setOpenUpdateNote] = useState(false);
   const [openAddLabel, setOpenAddLabel] = useState(false);
   const [hover, setHover] = useState(false);
-  const deleteNote = useNoteStore((state) => state.deleteNote);
+  const dispatch = useDispatch()
 
   const slicedText =
     note.noteText && note.noteText.length > 300
@@ -74,7 +75,7 @@ export default function NoteItem({ note }: NoteItemProps) {
               dataTip="Delete note"
               onClick={(event) => {
                 event.stopPropagation();
-                deleteNote(note.id);
+                dispatch(deleteNote(note.id));
               }}
             >
               <Trash2 size={17} />
