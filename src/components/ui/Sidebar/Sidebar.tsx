@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { useState, useRef } from "react";
 import { sidebarAtom } from "./sidebarAtom";
 import { useAtom } from "jotai";
@@ -13,7 +12,7 @@ export default function Sidebar() {
   const [openSidebar] = useAtom(sidebarAtom);
   const [openEditLabel, setOpenEditLabel] = useState(false);
   const labels = useLabelStore((state) => state.labels);
-  const customMenu = [
+  const sidebarMenu = [
     {
       icon: <Book />,
       name: "Notes",
@@ -24,8 +23,8 @@ export default function Sidebar() {
       name: "Edit labels",
       onClick: () => setOpenEditLabel(true),
     },
+    ...labels
   ];
-  const sidebarMenu = [...customMenu, ...labels];
 
   const parentRef = useRef<HTMLDivElement>(null);
 
@@ -54,33 +53,36 @@ export default function Sidebar() {
                 height: rowVirtualizer.totalSize,
               }}
             >
-              {rowVirtualizer.virtualItems.map((virtualRow) => (
-                <div
-                  key={virtualRow.index}
-                  ref={virtualRow.measureRef}
-                  className="absolute top-0 left-0 w-full"
-                  style={{
-                    transform: `translateY(${virtualRow.start}px)`,
-                  }}
-                >
-                  {"labelName" in sidebarMenu[virtualRow.index] ? (
-                    <SidebarItem
-                      icon={<Tag />}
-                      name={sidebarMenu[virtualRow.index].labelName}
-                      route={`/label/${
-                        sidebarMenu[virtualRow.index].labelName
-                      }`}
-                    />
-                  ) : (
-                    <SidebarItem
-                      icon={sidebarMenu[virtualRow.index].icon}
-                      name={sidebarMenu[virtualRow.index].name}
-                      route={sidebarMenu[virtualRow.index].route}
-                      onClick={sidebarMenu[virtualRow.index]?.onClick}
-                    />
-                  )}
-                </div>
-              ))}
+              {rowVirtualizer.virtualItems.map((virtualRow) => {
+                const item = sidebarMenu[virtualRow.index];
+
+                return (
+                  <div
+                    key={virtualRow.key}
+                    ref={virtualRow.measureRef}
+                    className="absolute top-0 left-0 w-full"
+                    style={{
+                      transform: `translateY(${virtualRow.start}px)`,
+                    }}
+                  >
+                    {"labelName" in item ? (
+                      <SidebarItem
+                        icon={<Tag />}
+                        name={item.labelName}
+                        route={`/label/${item.labelName
+                          }`}
+                      />
+                    ) : (
+                      <SidebarItem
+                        icon={item.icon}
+                        name={item.name}
+                        route={item.route}
+                        onClick={item.onClick}
+                      />
+                    )}
+                  </div>
+                )
+              })}
             </div>
           </div>
         </ul>
