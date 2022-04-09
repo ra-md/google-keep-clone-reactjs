@@ -1,13 +1,13 @@
 import NoteList from "../note/NoteList";
 import { useParams } from "react-router-dom";
 import { useNoteStore } from "~/store/noteStore";
-import { filterNotes } from "~/utils/filter-notes"
+import { searchNotes } from "~/utils/search-notes";
 
 export default function Search() {
   const { query } = useParams<{ query: string }>();
   const notes = useNoteStore((state) => state.notes);
 
-  const filteredNotes = filterNotes(notes, query);
+  const filteredNotes = searchNotes(notes, query);
 
   return (
     <>

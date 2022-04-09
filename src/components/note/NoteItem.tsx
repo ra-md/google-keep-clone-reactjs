@@ -6,9 +6,10 @@ import { Note } from "~/types";
 import clsx from "clsx";
 import { useNoteStore } from "~/store/noteStore";
 import SearchLabel from "../label/SearchLabel";
+import { sliceString } from "~/utils/slice-string";
 
 interface NoteItemProps {
-  note: Note
+  note: Note;
 }
 
 export default function NoteItem({ note }: NoteItemProps) {
@@ -17,14 +18,8 @@ export default function NoteItem({ note }: NoteItemProps) {
   const [hover, setHover] = useState(false);
   const deleteNote = useNoteStore((state) => state.deleteNote);
 
-  const slicedText =
-    note.noteText && note.noteText.length > 300
-      ? `${note.noteText.slice(0, 300)}...`
-      : note.noteText;
-  const slicedName =
-    note.noteName && note.noteName.length > 100
-      ? `${note.noteName.slice(0, 100)}...`
-      : note.noteName;
+  const slicedText = sliceString(note.noteText, 300);
+  const slicedName = sliceString(note.noteName, 100);
 
   function updateNoteToggle() {
     setOpenUpdateNote(!openUpdateNote);
@@ -56,7 +51,7 @@ export default function NoteItem({ note }: NoteItemProps) {
             data-testid="note-item-btn-wrapper"
           >
             <Button
-              style={{opacity: hover ? 1 : 0}}
+              style={{ opacity: hover ? 1 : 0 }}
               icon
               aria-label="Add label"
               dataTip="Add label"
@@ -68,7 +63,7 @@ export default function NoteItem({ note }: NoteItemProps) {
               <Tag size={17} />
             </Button>
             <Button
-              style={{opacity: hover ? 1 : 0}}
+              style={{ opacity: hover ? 1 : 0 }}
               icon
               aria-label="Delete note"
               dataTip="Delete note"

@@ -5,7 +5,7 @@ export interface Label {
 
 export interface Note {
   id: string;
-  noteName?: string;
-  noteText?: string;
+  noteName: string;
+  noteText: string;
   labelIds: string[];
 }

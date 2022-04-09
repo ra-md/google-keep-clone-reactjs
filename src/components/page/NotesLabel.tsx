@@ -3,6 +3,7 @@ import NoteList from "../note/NoteList";
 import { Tag } from "react-feather";
 import { useNoteStore } from "~/store/noteStore";
 import { useLabelStore } from "~/store/labelStore";
+import { findNoteByLabelId } from "../../utils/find-note-by-label-id";
 
 export default function NotesLabel() {
   const { labelName } = useParams<{ labelName: string }>();
@@ -10,11 +11,7 @@ export default function NotesLabel() {
   const labels = useLabelStore((state) => state.labels);
 
   const findLabel = labels.find((label) => label.labelName === labelName);
-  const filteredNotes = notes.filter((note) => {
-    if (findLabel) {
-      return note.labelIds.find((id) => id === findLabel.id);
-    }
-  });
+  const filteredNotes = findLabel ? findNoteByLabelId(notes, findLabel.id) : [];
 
   return (
     <>

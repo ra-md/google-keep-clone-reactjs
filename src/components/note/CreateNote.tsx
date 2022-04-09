@@ -12,7 +12,7 @@ export default function CreateNote() {
   const [note, setNote] = useState("");
   const createNote = useNoteStore((state) => state.createNote);
 
-  const submit = useCallback(async () => {
+  const submit = () => {
     if (title || note) {
       createNote({
         id: uuidv4(),
@@ -25,7 +25,7 @@ export default function CreateNote() {
       setNote("");
     }
     setVisible(false);
-  }, [title, note]);
+  };
 
   useEffect(() => {
     function handleClose(event: Event) {

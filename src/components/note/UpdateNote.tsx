@@ -31,8 +31,8 @@ export default function UpdateNote({
     (name === "" && text === "");
 
   useEffect(() => {
-    setName(note.noteName!);
-    setText(note.noteText!);
+    setName(note.noteName);
+    setText(note.noteText);
   }, [note.noteName, note.noteText, onOpenChange]);
 
   function handleUpdate() {

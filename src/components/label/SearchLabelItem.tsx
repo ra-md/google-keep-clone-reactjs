@@ -12,7 +12,7 @@ export default function SearchLabelItem({ label, note }: SearchLabelItemProps) {
   const { addLabel, removeLabel } = useNoteStore();
 
   useEffect(() => {
-    if (note?.labelIds?.indexOf(label.id) !== -1) {
+    if (note.labelIds.indexOf(label.id) !== -1) {
       setIsChecked(true);
     }
   }, [label, note]);

@@ -34,7 +34,7 @@ export default function SearchLabel({
           <SearchLabelInput setSearchResults={setSearchResults} />
         </div>
         <div className="max-h-96">
-          {labels != null && <SearchLabelList labels={labels} note={note} />}
+          {labels !== null && <SearchLabelList labels={labels} note={note} />}
         </div>
         <div className="rounded-b-lg sticky bg-primary pt-4 bottom-0 left-0 right-0 flex justify-end">
           <DialogClose asChild>

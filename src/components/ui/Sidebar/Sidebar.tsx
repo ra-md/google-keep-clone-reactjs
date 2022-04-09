@@ -23,7 +23,7 @@ export default function Sidebar() {
       name: "Edit labels",
       onClick: () => setOpenEditLabel(true),
     },
-    ...labels
+    ...labels,
   ];
 
   const parentRef = useRef<HTMLDivElement>(null);
@@ -69,8 +69,7 @@ export default function Sidebar() {
                       <SidebarItem
                         icon={<Tag />}
                         name={item.labelName}
-                        route={`/label/${item.labelName
-                          }`}
+                        route={`/label/${item.labelName}`}
                       />
                     ) : (
                       <SidebarItem
@@ -81,7 +80,7 @@ export default function Sidebar() {
                       />
                     )}
                   </div>
-                )
+                );
               })}
             </div>
           </div>

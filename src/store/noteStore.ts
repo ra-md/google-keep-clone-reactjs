@@ -53,7 +53,7 @@ export const useNoteStore = create<StoreState>(
           );
           set({ notes: [...notes] });
         }
-      }
+      },
     }),
     { name: "note" }
   )
